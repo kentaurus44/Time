@@ -32,3 +32,8 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Python/__pycache__/TypeSafeEnum.cpython-36.pyc
+Python/__pycache__/GameInteractingObjects.cpython-36.pyc
+Python/__pycache__/GameEvents.cpython-36.pyc
+Python/__pycache__/GameDialogs.cpython-36.pyc
+Python/__pycache__/CreateTypeSafeEnum.cpython-36.pyc
