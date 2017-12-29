@@ -138,6 +138,13 @@ public class GameEventManager
 
     protected GameEvents _events;
 
+#if DEBUG_ON
+    public GameEvents.GameEvent GetEvent(string eventName)
+    {
+        return _events.Get(eventName);
+    }
+#endif
+
     public GameEvents Events
     {
         get { return _events; }
@@ -163,6 +170,8 @@ public class GameEventManager
         }
 
         _events.UpdateStates();
+
+        OnStatesUpdated.SafeInvoke();
     }
 
     public bool IsEventComplete(string eventName)

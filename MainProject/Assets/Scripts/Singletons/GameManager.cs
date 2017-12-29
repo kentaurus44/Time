@@ -5,13 +5,13 @@ public class GameManager : SingletonComponent<GameManager>
     private GameEventManager _eventManager = new GameEventManager();
     private DialogManager _dialogManager = new DialogManager();
 
-#if UNITY_EDITOR // Used only to debugs and testing
-    public GameEventManager Events
+#if DEBUG_ON
+    public GameEventManager EventManager
     {
         get { return _eventManager; }
     }
 
-    public DialogManager Dialog
+    public DialogManager DialogManager
     {
         get { return _dialogManager; }
     }
@@ -26,6 +26,11 @@ public class GameManager : SingletonComponent<GameManager>
     public void CompleteEvent(string eventName)
     {
         _eventManager.UpdateEvent(eventName, true);
+    }
+
+    public void CompleteEvent(Events eventName)
+    {
+        _eventManager.UpdateEvent(eventName.ToString(), true);
     }
 
     public string GetDialogKey(string objectName, TypeSafeEnum[] storyEvents)

@@ -19,7 +19,7 @@
         {
             "EventName": "EVENT4",
             "Requirements": [
-                "EVENT3"
+                "EVENT2"
             ]
         },
         {
