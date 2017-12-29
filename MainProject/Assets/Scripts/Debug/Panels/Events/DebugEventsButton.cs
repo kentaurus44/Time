@@ -26,12 +26,15 @@ public class DebugEventsButton : MonoBehaviour
         switch (evt.State)
         {
             case GameEvents.States.Available:
+                _button.interactable = true;
                 _buttonTextField.color = Color.black;
                 break;
             case GameEvents.States.Locked:
+                _button.interactable = false;
                 _buttonTextField.color = Color.red;
                 break;
             case GameEvents.States.Completed:
+                _button.interactable = false;
                 _buttonTextField.color = Color.green;
                 break;
             default:

@@ -17,6 +17,11 @@ public class DebugEventsPanel : MonoBehaviour
         InitButtons();
     }
 
+    protected void OnDisable()
+    {
+        gameObject.SetActive(false);
+    }
+
     protected void InitButtons()
     {
         DebugEventsButton button;

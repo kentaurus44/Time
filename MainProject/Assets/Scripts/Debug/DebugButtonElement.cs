@@ -21,6 +21,11 @@ public class DebugButtonElement : MonoBehaviour
         _button.onClick.AddListener(OnButtonCB);
     }
 
+    protected void OnDisable()
+    {
+        _image.color = Color.white;
+    }
+
     public void UpdateButtonElement(GameObject target)
     {
         _ButtonTextField.text = target.name;

@@ -5,7 +5,6 @@ public class GameManager : SingletonComponent<GameManager>
     private GameEventManager _eventManager = new GameEventManager();
     private DialogManager _dialogManager = new DialogManager();
 
-#if DEBUG_ON
     public GameEventManager EventManager
     {
         get { return _eventManager; }
@@ -15,7 +14,6 @@ public class GameManager : SingletonComponent<GameManager>
     {
         get { return _dialogManager; }
     }
-#endif
 
     public void Load(string eventJson, string dialogJson)
     {

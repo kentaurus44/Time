@@ -22,11 +22,21 @@ public class DebugPanel : MonoBehaviour
 
     private List<DebugButtonElement> _debugButtons = new List<DebugButtonElement>();
 
-    protected void Awake()
+    protected void Start()
     {
         InitPanels();
         EnabledElements(false);
         _debugShowButton.onClick.AddListener(DebugButtonCB);
+        _debugShowButton.gameObject.SetActive(false);
+    }
+
+    protected void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            _debugShowButton.gameObject.SetActive(!_debugShowButton.gameObject.activeSelf);
+            EnabledElements(false);
+        }
     }
 
     protected void InitPanels()
