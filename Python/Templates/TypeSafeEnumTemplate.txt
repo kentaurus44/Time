@@ -1,0 +1,6 @@
+public class %s : TypeSafeEnum 
+{
+%s
+
+	protected %s(string name) : base(name) { }
+}
