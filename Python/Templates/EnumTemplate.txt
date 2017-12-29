@@ -1,0 +1,4 @@
+public enum %s
+{
+%s
+}

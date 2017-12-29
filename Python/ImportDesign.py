@@ -2,7 +2,7 @@ import sys
 import getopt
 import GameEvents
 import GameDialogs
-import TypeSafeEnum
+import Enum
 
 #Sheets
 Events = 0
@@ -18,7 +18,8 @@ JsonOutput = '/MainProject/Assets/Resources/Configurations/'
 TypeSafeEnumOutput = '/MainProject/Assets/Scripts/TypeSafeEnums/'
 TemplateInteractingObjectScriptName = 'InteractingObjectEnum'
 TemplateEventsScriptName = 'ObjectEnum'
-
+TemplateEnumEventName = 'Events'
+TemplateEnumInteracingObjectName = 'InteracingObject'
 
 def main(argv):
 	export = bool(0)
@@ -59,8 +60,8 @@ def UpdateEvents(exportJson, updateEnum):
 		GameEvents.Export(path, Events, JsonOutput)
 		print('GameEvents.Export')
 	if updateEnum:
-		TypeSafeEnum.Create(path, Events, TypeSafeEnumOutput, TemplateEventsScriptName)
-		print('TypeSafeEnum.Create')
+		Enum.Create(path, Events, TypeSafeEnumOutput, TemplateEventsScriptName, TemplateEnumEventName)
+		print('Enum.Create')
 
 def UpdateDialogs(exportJson):
 	if exportJson:
@@ -69,8 +70,8 @@ def UpdateDialogs(exportJson):
 
 def UpdateInteractingObjects(updateEnum):
 	if updateEnum:
-		TypeSafeEnum.Create(path, InteractingObject, TypeSafeEnumOutput, TemplateInteractingObjectScriptName)
-		print('TypeSafeEnum.Create')
+		Enum.Create(path, InteractingObject, TypeSafeEnumOutput, TemplateInteractingObjectScriptName, TemplateEnumInteracingObjectName)
+		print('Enum.Create')
 
 if __name__ == "__main__":
    main(sys.argv[1:])
