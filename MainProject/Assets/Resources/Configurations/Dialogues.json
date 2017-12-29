@@ -1,0 +1,16 @@
+{
+    "Dialogs": [
+        {
+            "EventName": "Event1",
+            "First": "FIRST1",
+            "InteractingObject": "Object1",
+            "Repeat": "REPEAT1"
+        },
+        {
+            "EventName": "Event2",
+            "First": "FIRST2",
+            "InteractingObject": "Object2",
+            "Repeat": "REPEAT2"
+        }
+    ]
+}

@@ -1,0 +1,39 @@
+{
+    "Events": [
+        {
+            "EventName": "EVENT1",
+            "Requirements": []
+        },
+        {
+            "EventName": "EVENT2",
+            "Requirements": [
+                "EVENT1"
+            ]
+        },
+        {
+            "EventName": "EVENT3",
+            "Requirements": [
+                "EVENT2"
+            ]
+        },
+        {
+            "EventName": "EVENT4",
+            "Requirements": [
+                "EVENT3"
+            ]
+        },
+        {
+            "EventName": "EVENT5",
+            "Requirements": [
+                "EVENT3",
+                "EVENT4"
+            ]
+        },
+        {
+            "EventName": "EVENT6",
+            "Requirements": [
+                "EVENT5"
+            ]
+        }
+    ]
+}
