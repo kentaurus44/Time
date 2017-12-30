@@ -134,7 +134,7 @@ public class GameEvents
 
 public class GameEventManager
 {
-    public Action OnStatesUpdated;
+    public Action<string> OnStatesUpdated;
 
     protected GameEvents _events;
 
@@ -164,12 +164,13 @@ public class GameEventManager
                     evt.State = GameEvents.States.Completed;
                 break;
             default:
+                eventName = string.Empty;
                 break;
         }
 
         _events.UpdateStates();
 
-        OnStatesUpdated.SafeInvoke();
+        OnStatesUpdated.SafeInvoke(eventName);
     }
 
     public bool IsEventComplete(string eventName)

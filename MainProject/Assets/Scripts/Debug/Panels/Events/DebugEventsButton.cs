@@ -49,7 +49,7 @@ public class DebugEventsButton : MonoBehaviour
         GameManager.Instance.CompleteEvent(_event.EventName);
     }
 
-    protected void OnStateCallback()
+    protected void OnStateCallback(string compeltedEvent)
     {
         GameEvents.GameEvent evt = GameManager.Instance.EventManager.GetEvent(_event.EventName);
         UpdateButtonElement(evt);

@@ -1,4 +1,4 @@
-public enum InteracingObject
+public enum InteractingObject
 {
 	Object1,
 	Object2,

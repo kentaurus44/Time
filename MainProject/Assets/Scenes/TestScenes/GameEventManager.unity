@@ -413,7 +413,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1085748556}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ae7dd7be3bee1d48a663f5a2079c9ab, type: 3}
   m_Name: 
@@ -629,12 +629,26 @@ Prefab:
     - target: {fileID: 224492373168623688, guid: cc41915ab0606e7459122f6eefbd3a09,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000061006933
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 224492373168623688, guid: cc41915ab0606e7459122f6eefbd3a09,
         type: 2}
       propertyPath: m_SizeDelta.y
+      value: -576.05164
+      objectReference: {fileID: 0}
+    - target: {fileID: 224374049217330748, guid: cc41915ab0606e7459122f6eefbd3a09,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344371848858316, guid: cc41915ab0606e7459122f6eefbd3a09, type: 2}
+      propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224733591883833078, guid: cc41915ab0606e7459122f6eefbd3a09,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: -94.051636
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc41915ab0606e7459122f6eefbd3a09, type: 2}
@@ -774,7 +788,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 263.75, y: 263.75}
+  m_CellSize: {x: 294.75, y: 294.75}
   m_Spacing: {x: 15, y: 15}
   m_Constraint: 1
   m_ConstraintCount: 4

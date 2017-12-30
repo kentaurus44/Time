@@ -19,7 +19,7 @@ TypeSafeEnumOutput = '/MainProject/Assets/Scripts/TypeSafeEnums/'
 TemplateInteractingObjectScriptName = 'InteractingObjectEnum'
 TemplateEventsScriptName = 'ObjectEnum'
 TemplateEnumEventName = 'Events'
-TemplateEnumInteracingObjectName = 'InteracingObject'
+TemplateEnumInteracingObjectName = 'InteratcingObject'
 
 def main(argv):
 	export = bool(0)

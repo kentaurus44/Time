@@ -20,6 +20,26 @@ public class GameDialog
     [SerializeField]
     public Dialog[] Dialogs;
 
+    public List<string> this[string objectName]
+    {
+        get
+        {
+            List<string> list = new List<string>();
+            if (!_dialogs.ContainsKey(objectName))
+            {
+                Debug.LogErrorFormat("Could not find {0} for a dialogue", objectName);
+                return list;
+            }
+
+            for (int i = 0, count = _dialogs[objectName].Count; i < count; ++i)
+            {
+                list.Add(_dialogs[objectName][i].EventName);
+            }
+
+            return list; 
+        }
+    }
+
     public string this[string objectName, string eventName]
     {
         get
@@ -71,6 +91,19 @@ public class DialogManager
     {
         _dialog = JsonUtility.FromJson<GameDialog>(file);
         _dialog.Sort();
+    }
+
+    public Events[] GetEvents(string objectName)
+    {
+        List<string> list = _dialog[objectName];
+        List<Events> eventList = new List<Events>();
+
+        for (int i = 0; i < list.Count; ++i)
+        {
+            eventList.Add(EnumExtensions.ParseEnum<Events>(list[i]));
+        }
+
+        return eventList.ToArray();
     }
 
     public string GetKey(string objectName, string eventName)
