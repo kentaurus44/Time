@@ -53,6 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224833860553979720}
   - component: {fileID: 222317439449547142}
+  - component: {fileID: 114205620780713890}
   - component: {fileID: 114776536029068086}
   - component: {fileID: 114140633319398434}
   m_Layer: 5
@@ -106,6 +107,7 @@ GameObject:
   - component: {fileID: 224928211025789600}
   - component: {fileID: 222192201317333138}
   - component: {fileID: 114935141160057742}
+  - component: {fileID: 114875668796389004}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -238,6 +240,19 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114205620780713890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154666303829028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae364127a81f68429c578ece0cf6b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 114140633319398434}
+  _text: {fileID: 114050620885370076}
 --- !u!114 &114308436297820320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,6 +366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _backButton: {fileID: 114308436297820320}
+  _defaultChapterElement: {fileID: 114875668796389004}
+  _container: {fileID: 224742598039669278}
 --- !u!114 &114701504965361584
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -440,6 +457,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114875668796389004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1507573314461114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 787f9113bfb0608489662f1ee5649831, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonWidget: {fileID: 114205620780713890}
 --- !u!114 &114896368031604078
 MonoBehaviour:
   m_ObjectHideFlags: 1
