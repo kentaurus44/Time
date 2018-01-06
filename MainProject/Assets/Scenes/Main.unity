@@ -195,6 +195,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2ffc28464a5ae849947c33aff2c8240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _loadingPanel: {fileID: 114899576039066448, guid: a757db83cacc2d7489bbeac3eada49be,
+    type: 2}
   _managers: {fileID: 114427647373911336, guid: 6b63b9db9e625dc42bee513cc104a53e,
     type: 2}
   _uiManager: {fileID: 114038139079020204, guid: 020a0fc706374b14ebb9849a8ede86a8,

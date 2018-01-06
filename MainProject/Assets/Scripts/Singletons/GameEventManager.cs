@@ -138,6 +138,8 @@ public class GameEventManager
 
     protected GameEvents _events;
 
+    private string Chapter;
+
     public GameEvents Events
     {
         get { return _events; }
@@ -151,7 +153,6 @@ public class GameEventManager
     public void Load(string file)
     {
         _events = JsonUtility.FromJson<GameEvents>(file);
-        _events.UpdateStates();
     }
 
     public void UpdateEvent(string eventName, bool completed)

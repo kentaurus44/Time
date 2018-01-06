@@ -70,7 +70,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32cc42398aca07345824e8c950963b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panels: []
+  _panels:
+  - {fileID: 114623330051802666, guid: af1f794e3ef4a704daab95670e95e462, type: 2}
+  - {fileID: 114118800713028242, guid: 0bb4fce4be79a184fbbc632ee0137364, type: 2}
+  - {fileID: 114496820001609892, guid: edb38eacb3e2c5048a60f13b3cadfe9c, type: 2}
   _rootDisplay1: {fileID: 223979842473657020}
 --- !u!114 &114139857208464134
 MonoBehaviour:
