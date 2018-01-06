@@ -153,6 +153,7 @@ public class GameEventManager
     public void Load(string file)
     {
         _events = JsonUtility.FromJson<GameEvents>(file);
+        _events.UpdateStates();
     }
 
     public void UpdateEvent(string eventName, bool completed)

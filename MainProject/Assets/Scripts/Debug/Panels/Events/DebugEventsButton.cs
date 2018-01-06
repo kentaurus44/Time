@@ -18,12 +18,21 @@ public class DebugEventsButton : MonoBehaviour
         GameManager.Instance.EventManager.OnStatesUpdated += OnStateCallback;
     }
 
-    public void UpdateButtonElement(GameEvents.GameEvent evt)
+    public void UpdateButtonElement(string eventName)
     {
-        _event = evt;
-        _buttonTextField.text = evt.EventName;
+        _buttonTextField.text = eventName;
+        _event = GameManager.Instance.EventManager.GetEvent(eventName);
+        UpdateButtonElement();
+    }
 
-        switch (evt.State)
+    public void UpdateButtonElement()
+    {
+        if (_event == null)
+        {
+            return;
+        }
+
+        switch (_event.State)
         {
             case GameEvents.States.Available:
                 _button.interactable = true;
@@ -51,7 +60,7 @@ public class DebugEventsButton : MonoBehaviour
 
     protected void OnStateCallback(string compeltedEvent)
     {
-        GameEvents.GameEvent evt = GameManager.Instance.EventManager.GetEvent(_event.EventName);
-        UpdateButtonElement(evt);
+        _event = GameManager.Instance.EventManager.GetEvent(_event.EventName);
+        UpdateButtonElement();
     }
 }

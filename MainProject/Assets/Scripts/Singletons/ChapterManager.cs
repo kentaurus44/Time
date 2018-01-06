@@ -31,14 +31,37 @@ public class GameChapters
         }
     }
 
+    public string[] this[string id]
+    {
+        get
+        {
+            for (int i = 0, count = Count; i < count; ++i)
+            {
+                if (Chapters[i].Chapter.CompareTo(id) == 0)
+                {
+                    return Chapters[i].Events;
+                }
+            }
+            return null;
+        }
+    }
+
+
     public int Count
     {
         get { return Chapters.Length; }
     }
 
-    public List<string> GetChapters()
+    public string[] GetChapters()
     {
-        return new List<string>();
+        string[] list = new string[Count];
+
+        for (int i = 0, count = Count; i < count; ++i)
+        {
+            list[i] = Chapters[i].Chapter;
+        }
+
+        return list;
     }
 
 }
@@ -50,5 +73,15 @@ public class ChapterManager
     public void Load(string file)
     {
         _chapters = JsonUtility.FromJson<GameChapters>(file);
+    }
+
+    public string[] GetChapters()
+    {
+        return _chapters.GetChapters();
+    }
+
+    public string[] GetEvents(string chapter)
+    {
+        return _chapters[chapter];
     }
 }

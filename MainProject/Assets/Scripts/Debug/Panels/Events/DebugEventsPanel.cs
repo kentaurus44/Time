@@ -8,6 +8,9 @@ public class DebugEventsPanel : MonoBehaviour
     protected DebugEventsButton _defaultButtonElement;
 
     [SerializeField]
+    protected DebugEventChapter _defaultChapterSeprator;
+
+    [SerializeField]
     protected Transform _container;
 
     private List<DebugEventsButton> _buttons = new List<DebugEventsButton>();
@@ -25,13 +28,21 @@ public class DebugEventsPanel : MonoBehaviour
     protected void InitButtons()
     {
         DebugEventsButton button;
-        int count = GameManager.Instance.EventManager.Events.Count;
-        for (int i = 0; i < count; ++i)
+        string[] chapters = GameManager.Instance.ChapterManager.GetChapters();
+        
+        for (int j = 0; j < chapters.Length; ++j)
         {
-            button = Instantiate<DebugEventsButton>(_defaultButtonElement, _container, true);
-            button.UpdateButtonElement(GameManager.Instance.EventManager.Events[i]);
-            button.gameObject.SetActive(true);
-            _buttons.Add(button);
+            DebugEventChapter chapter = Instantiate<DebugEventChapter>(_defaultChapterSeprator, _container, true);
+            chapter.gameObject.SetActive(true);
+            chapter.UpdateInformation(chapters[j]);
+            string[] events = GameManager.Instance.ChapterManager.GetEvents(chapters[j]);
+            for (int i = 0, count = events.Length; i < count; ++i)
+            {
+                button = Instantiate<DebugEventsButton>(_defaultButtonElement, _container, true);
+                button.UpdateButtonElement(events[i]);
+                button.gameObject.SetActive(true);
+                _buttons.Add(button);
+            }
         }
     }
 }

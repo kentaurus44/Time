@@ -6,14 +6,12 @@ import simplejson as json
 EventNameKey = 'EventName'
 EventRequirementsKey = 'Requirements'
 EventContainerKey = 'Events'
-EventChapterKey = 'Chapter'
 
 EventOutputFileName = 'Events.json'
 
 #Columns
 EventName = 0
-EventChapter = 1
-EventRequirements = 2
+EventRequirements = 1
 
 def Export(path, page, output):
 	wb = xlrd.open_workbook(path)
@@ -28,9 +26,6 @@ def Export(path, page, output):
 
 		#get eventName
 		event[EventNameKey] = sh.cell(row, EventName).value
-
-		#get eventChapter
-		event[EventChapterKey] = sh.cell(row, EventChapter).value
 
 		#get requiremnts
 		event[EventRequirementsKey] = [];
