@@ -1,0 +1,27 @@
+{
+    "Chapters": [
+        {
+            "Chapter": "Chapter 1",
+            "Events": [
+                "EVENT1",
+                "EVENT2",
+                "EVENT3",
+                "EVENT4",
+                "EVENT5",
+                "EVENT6"
+            ]
+        },
+        {
+            "Chapter": "Chapter 2",
+            "Events": [
+                "EVENT7"
+            ]
+        },
+        {
+            "Chapter": "Chapter 3",
+            "Events": [
+                "EVENT8"
+            ]
+        }
+    ]
+}

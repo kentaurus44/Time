@@ -5,5 +5,7 @@ public enum Events
 	EVENT3,
 	EVENT4,
 	EVENT5,
-	EVENT6
+	EVENT6,
+	EVENT7,
+	EVENT8
 }

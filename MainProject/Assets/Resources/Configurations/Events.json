@@ -1,28 +1,33 @@
 {
     "Events": [
         {
+            "Chapter": 1.0,
             "EventName": "EVENT1",
             "Requirements": []
         },
         {
+            "Chapter": 1.0,
             "EventName": "EVENT2",
             "Requirements": [
                 "EVENT1"
             ]
         },
         {
+            "Chapter": 1.0,
             "EventName": "EVENT3",
             "Requirements": [
                 "EVENT2"
             ]
         },
         {
+            "Chapter": 1.0,
             "EventName": "EVENT4",
             "Requirements": [
-                "EVENT2"
+                "EVENT3"
             ]
         },
         {
+            "Chapter": 1.0,
             "EventName": "EVENT5",
             "Requirements": [
                 "EVENT3",
@@ -30,10 +35,21 @@
             ]
         },
         {
+            "Chapter": 1.0,
             "EventName": "EVENT6",
             "Requirements": [
                 "EVENT5"
             ]
+        },
+        {
+            "Chapter": 2.0,
+            "EventName": "EVENT7",
+            "Requirements": []
+        },
+        {
+            "Chapter": 3.0,
+            "EventName": "EVENT8",
+            "Requirements": []
         }
     ]
 }
