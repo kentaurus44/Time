@@ -4,6 +4,7 @@ public class GameManager : SingletonComponent<GameManager>
 {
     private GameEventManager _eventManager = new GameEventManager();
     private DialogManager _dialogManager = new DialogManager();
+    private ChapterManager _chapterManager = new ChapterManager();
 
     public GameEventManager EventManager
     {
@@ -15,10 +16,16 @@ public class GameManager : SingletonComponent<GameManager>
         get { return _dialogManager; }
     }
 
-    public void Load(string eventJson, string dialogJson)
+    public ChapterManager ChapterManager
+    {
+        get { return _chapterManager; }
+    }
+
+    public void Load(string eventJson, string dialogJson, string chapterJson)
     {
         _eventManager.Load(eventJson);
         _dialogManager.Load(dialogJson);
+        _chapterManager.Load(chapterJson);
     }
 
     public void CompleteEvent(string eventName)
