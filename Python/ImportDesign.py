@@ -20,7 +20,9 @@ JsonOutput = '/MainProject/Assets/Resources/Configurations/'
 TypeSafeEnumOutput = '/MainProject/Assets/Scripts/TypeSafeEnums/'
 TemplateInteractingObjectScriptName = 'InteractingObjectEnum'
 TemplateEventsScriptName = 'ObjectEnum'
+TemplateChaptersScriptName = 'ChapterEnum'
 TemplateEnumEventName = 'Events'
+TemplateEnumChapterName = 'Chapters'
 TemplateEnumInteracingObjectName = 'InteractingObject'
 
 def main(argv):
@@ -61,12 +63,15 @@ def main(argv):
 	if interacting:
 		UpdateInteractingObjects(updateEnum)
 	if chapters:
-		UpdateChapters(export)		
+		UpdateChapters(export, updateEnum)		
 
-def UpdateChapters(exportJson):
+def UpdateChapters(exportJson, updateEnum):
 	if exportJson:
 		GameChapters.Export(path, Chapters, JsonOutput);
 		print('GameChapters.Export')
+	if updateEnum:
+		Enum.Create(path, Chapters, TypeSafeEnumOutput, TemplateChaptersScriptName, TemplateEnumChapterName, bool(1))
+		print('Enum.Create')
 	pass
 
 def UpdateEvents(exportJson, updateEnum):
@@ -74,7 +79,7 @@ def UpdateEvents(exportJson, updateEnum):
 		GameEvents.Export(path, Events, JsonOutput)
 		print('GameEvents.Export')
 	if updateEnum:
-		Enum.Create(path, Events, TypeSafeEnumOutput, TemplateEventsScriptName, TemplateEnumEventName)
+		Enum.Create(path, Events, TypeSafeEnumOutput, TemplateEventsScriptName, TemplateEnumEventName, bool(0))
 		print('Enum.Create')
 	pass
 
@@ -86,7 +91,7 @@ def UpdateDialogs(exportJson):
 
 def UpdateInteractingObjects(updateEnum):
 	if updateEnum:
-		Enum.Create(path, InteractingObject, TypeSafeEnumOutput, TemplateInteractingObjectScriptName, TemplateEnumInteracingObjectName)
+		Enum.Create(path, InteractingObject, TypeSafeEnumOutput, TemplateInteractingObjectScriptName, TemplateEnumInteracingObjectName, bool(0))
 		print('Enum.Create')
 	pass
 

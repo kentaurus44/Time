@@ -1,7 +1,7 @@
 {
     "Chapters": [
         {
-            "Chapter": "Chapter 1",
+            "Chapter": "Chapter1",
             "Events": [
                 "EVENT1",
                 "EVENT2",
@@ -12,13 +12,13 @@
             ]
         },
         {
-            "Chapter": "Chapter 2",
+            "Chapter": "Chapter2",
             "Events": [
                 "EVENT7"
             ]
         },
         {
-            "Chapter": "Chapter 3",
+            "Chapter": "Chapter3",
             "Events": [
                 "EVENT8"
             ]

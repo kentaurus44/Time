@@ -23,7 +23,7 @@ public class InteractingObjectBase : MonoBehaviour
 
     private int _currentEventIndex = 0;
 
-    protected virtual void Start()
+    public void Init()
     {
         GameManager.Instance.EventManager.OnStatesUpdated += OnStateCallback;
         _events = GameManager.Instance.DialogManager.GetEvents(_objID.ToString());

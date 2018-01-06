@@ -9,6 +9,6 @@ public class LevelSelectingChapterElement : MonoBehaviour
 
     public void UpdateElement(string chapter)
     {
-        _buttonWidget.UpdateWidget(chapter);
+        _buttonWidget.UpdateWidget(chapter, LevelSelectingPanel.Instance.OnChapterSelected);
     }
 }

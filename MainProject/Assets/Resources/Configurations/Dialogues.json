@@ -11,6 +11,12 @@
             "First": "FIRST2",
             "InteractingObject": "Object2",
             "Repeat": "REPEAT2"
+        },
+        {
+            "EventName": "Event7",
+            "First": "FIRST3",
+            "InteractingObject": "Object4",
+            "Repeat": "REPEAT3"
         }
     ]
 }

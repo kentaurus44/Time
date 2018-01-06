@@ -8,9 +8,9 @@ public class OptionsPanel : BasePanel<OptionsPanel>
     [SerializeField]
     protected Button _closeButton;
 
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
         _closeButton.onClick.AddListener(CloseButtonCB);
     }
 

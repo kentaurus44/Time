@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class LevelSelectingPanel : BasePanel<LevelSelectingPanel>
 {
+    public Action<string> OnChapterSelected;
+
     [SerializeField]
     protected Button _backButton;
 
@@ -16,15 +19,16 @@ public class LevelSelectingPanel : BasePanel<LevelSelectingPanel>
 
     private ObjectPool<LevelSelectingChapterElement> _chapterPool;
 
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
+        OnChapterSelected += OnChapterSelectedCB;
+        _backButton.onClick.AddListener(BackButtonCB);
+
         if (_chapterPool == null)
         {
             _chapterPool = new ObjectPool<LevelSelectingChapterElement>(_defaultChapterElement, _container, 5);
         }
-
-        _backButton.onClick.AddListener(BackButtonCB);
 
         string[] chapters = GameManager.Instance.ChapterManager.GetChapters();
 
@@ -50,5 +54,12 @@ public class LevelSelectingPanel : BasePanel<LevelSelectingPanel>
     {
         MainPanel.Show();
         Hide();
+    }
+
+    private void OnChapterSelectedCB(string chapter)
+    {
+        GameplayManager.Instance.Load(chapter);
+        Hide();
+        GameplayPanel.Load(chapter);
     }
 }

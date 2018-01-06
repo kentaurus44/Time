@@ -11,9 +11,9 @@ public class MainPanel : BasePanel<MainPanel>
     [SerializeField]
     protected Button _optionButton;
 
-    protected override void Awake()
+    public override void Init()
     {
-        base.Awake();
+        base.Init();
         _playButton.onClick.AddListener(OnPlayButtonCB);
         _optionButton.onClick.AddListener(OnOptionButtonCB);
     }
