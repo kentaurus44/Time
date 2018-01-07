@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b9c915b637a7b341b5e4d8eb033d694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPausing: 1
   _closeButton: {fileID: 114193199927183364}
 --- !u!114 &114501664612222670
 MonoBehaviour:
