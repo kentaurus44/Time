@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: 114279976951140420, guid: cbc4791a31a7bd041a5883b7e9b5a9fb, type: 2}
   - {fileID: 114783873933955000, guid: c570b4034bdace54890b689801fb18a3, type: 2}
   - {fileID: 114493552622858272, guid: ad631683d351df744a804f07490432a4, type: 2}
+  - {fileID: 114115770401043860, guid: 2b64b13fb5ccb9c4f82e66feb1658266, type: 2}
   _eventsJSON: {fileID: 4900000, guid: 9ed488e4c2615824cb7d2782965bcd0f, type: 3}
   _dialogsJSON: {fileID: 4900000, guid: 37ec7731b1b29ad4ba839dce9b848e14, type: 3}
   _chaptersJSON: {fileID: 4900000, guid: 4f190cd1d01aa864482c9ec53bb96774, type: 3}

@@ -12,7 +12,7 @@ public class GameplayPanel : BasePanel<GameplayPanel>
     [SerializeField]
     protected Button _optionsButton;
 
-    private string _chapter;
+    //private string _chapter;
 
     public override void Init()
     {
@@ -33,7 +33,7 @@ public class GameplayPanel : BasePanel<GameplayPanel>
 
     public static void Load(string chapter)
     {
-        Instance._chapter = chapter;
+        //Instance._chapter = chapter;
         Show();
     }
 }
