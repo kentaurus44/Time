@@ -218,17 +218,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 1640279920348644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04a791d20312bb9478a622aa137fe518, type: 3}
+  m_Script: {fileID: 11500000, guid: 841f5eb90de41964aa3db25f69bded4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _previousTrack: {fileID: 0}
   _currentTrack: {fileID: 0}
   _gravity: 9.62
-  _jumpVelocity: 650
   _fallMultiplier: 5
   _lowToJumpMultiplier: 2.5
+  _jumpVelocity: 650
   _isInAir: 1
   _move: 500
+  _switchTrackAtEnd: 1
 --- !u!114 &114493552622858272
 MonoBehaviour:
   m_ObjectHideFlags: 1

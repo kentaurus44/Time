@@ -59,7 +59,7 @@ public class Track : MonoBehaviour
         return Mathf.Lerp(_begin.position.y, _end.position.y, GetRatio(x));
     }
 
-    private float GetRatio(float x)
+    public float GetRatio(float x)
     {
         return (x - _begin.position.x) / (_end.position.x - _begin.position.x);
     }

@@ -9,42 +9,58 @@ public class TrackVehicle : MonoBehaviour
     [SerializeField]
     protected Track _currentTrack;
 
+    [Header("Gravity")]
     [SerializeField]
-    protected float _gravity;
-
-    [Header("Jump")]
-    [SerializeField]
-    protected float _jumpVelocity;
+    protected float _gravity = 9.62f;
     [SerializeField]
     protected float _fallMultiplier = 1.5f;
     [SerializeField]
     protected float _lowToJumpMultiplier = 1f;
+
+    [Header("Jump")]
     [SerializeField]
-    private bool _isInAir = false;
+    protected float _jumpVelocity = 650f;
+
+    [SerializeField]
+    protected bool _isInAir = false;
 
     [Header("Movement")]
     [SerializeField]
     protected float _move = 100f;
+    [SerializeField]
+    protected bool _switchTrackAtEnd = true;
 
-    private Vector3 _velocity;
-    private Vector3 _predictedPosition;
-    private Track _tempTrack;
+    protected Vector3 _velocity;
+    protected Vector3 _predictedPosition;
+    protected Track _tempTrack;
 
-    public void OnUpdate()
+    public bool IsInAir
     {
-        if (Input.GetKey(KeyCode.D))
-        {
-            _velocity.x = _move;
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            _velocity.x = -_move;
-        }
-        else
-        {
-            _velocity.x = 0f;
-        }
+        get { return _isInAir; }
+    }
 
+    public bool IsAtEnd
+    {
+        get
+        {
+            float ratio = _currentTrack.GetRatio(transform.position.x);
+            return ratio <= 0.05f || ratio >= 0.95f;
+        }
+    }
+
+    public virtual void Move(float direction)
+    {
+        _velocity.x = _move * direction;
+    }
+
+    public virtual void Jump()
+    {
+        _velocity.y = _jumpVelocity;
+        _isInAir = true;
+    }
+
+    public virtual void OnUpdate()
+    {
         _tempTrack = TrackManager.Instance.GetLandingTrack(transform);
         if (_currentTrack == null || _tempTrack != null && _tempTrack != _currentTrack)
         {
@@ -52,24 +68,7 @@ public class TrackVehicle : MonoBehaviour
             _currentTrack = _tempTrack;
         }
 
-        if (!_isInAir && Input.GetKeyDown(KeyCode.Space))
-        {
-            _velocity.y = _jumpVelocity;
-            _isInAir = true;
-        }
-
-        if (_isInAir)
-        {
-            if (Input.GetKey(KeyCode.Space))
-            {
-                _velocity.y -= Mathf.Abs(_gravity) * _lowToJumpMultiplier;
-            }
-            else
-            {
-                _velocity.y -= Mathf.Abs(_gravity) * _fallMultiplier;
-            }
-
-        }
+        ApplyGravity();
 
         _predictedPosition = transform.position + _velocity * Time.deltaTime;
 
@@ -89,27 +88,45 @@ public class TrackVehicle : MonoBehaviour
 
                 if (Mathf.Abs(floor - _predictedPosition.y) < 1f || _predictedPosition.y < floor)
                 {
-                    _predictedPosition.y = _currentTrack.GetFloor(_predictedPosition.x) + 0.01f;
+                    _predictedPosition.y = GetHeight();
                     _velocity.y = 0;
                     _isInAir = false;
                 }
             }
             else if (!_currentTrack.IsOnTrack(_predictedPosition))
             {
-                _previousTrack = _currentTrack;
-                _currentTrack = _currentTrack.GetNewTrack(_predictedPosition);
-
-                if (_currentTrack != null)
-                {
-                    _predictedPosition.y = _currentTrack.GetFloor(_predictedPosition.x) + 0.01f;
-                }
+                SwitchTracks();
             }
             else
             {
-                _predictedPosition.y = _currentTrack.GetFloor(_predictedPosition.x) + 0.01f;
+                _predictedPosition.y = GetHeight();
             }
         }
 
         transform.position = _predictedPosition;
+    }
+
+    protected virtual void ApplyGravity()
+    {
+        _velocity.y -= Mathf.Abs(_gravity) * _fallMultiplier;
+    }
+
+    protected virtual void SwitchTracks()
+    {
+        if (_switchTrackAtEnd)
+        {
+            _previousTrack = _currentTrack;
+            _currentTrack = _currentTrack.GetNewTrack(_predictedPosition);
+
+            if (_currentTrack != null)
+            {
+                _predictedPosition.y = GetHeight();
+            }
+        }
+    }
+
+    protected float GetHeight()
+    {
+        return _currentTrack.GetFloor(_predictedPosition.x) + 0.01f;
     }
 }
