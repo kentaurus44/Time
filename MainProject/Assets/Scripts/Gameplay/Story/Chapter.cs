@@ -10,9 +10,17 @@ public class Chapter : MonoBehaviour
     [SerializeField]
     protected InteractingObjectManager _interactingObjectManager;
 
+    [SerializeField]
+    protected Transform _characterInitialPosition;
+
     public string ChapterKey
     {
         get { return _chapter.ToString(); }
+    }
+
+    public Transform CharacterPosition
+    {
+        get { return _characterInitialPosition; }
     }
 
     public IEnumerator Load()

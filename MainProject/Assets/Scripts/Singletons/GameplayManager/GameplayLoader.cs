@@ -9,6 +9,16 @@ public class GameplayLoader : MonoBehaviour
 
     protected Chapter _currentChapter;
 
+    public Transform PlayerInitialLocation
+    {
+        get { return _currentChapter.CharacterPosition; }
+    }
+
+    public Chapter Chapter
+    {
+        get { return _currentChapter; }
+    }
+
     public IEnumerator LoadChapter(string chapter)
     {
         for (int i = 0, count = _chapters.Length; i < count; ++i)
