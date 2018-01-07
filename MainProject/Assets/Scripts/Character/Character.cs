@@ -12,13 +12,4 @@ public class Character : GameplayItem
         base.OnUpdate();
         _trackVehicule.OnUpdate();
     }
-
-    public void Move(float direction)
-    {
-    }
-
-    public void Gravity()
-    {
-        
-    }
 }

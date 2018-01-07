@@ -11,6 +11,9 @@ public class Chapter : MonoBehaviour
     protected InteractingObjectManager _interactingObjectManager;
 
     [SerializeField]
+    protected TrackContainer _trackContainer;
+
+    [SerializeField]
     protected Transform _characterInitialPosition;
 
     public string ChapterKey
@@ -21,6 +24,11 @@ public class Chapter : MonoBehaviour
     public Transform CharacterPosition
     {
         get { return _characterInitialPosition; }
+    }
+
+    public TrackContainer TrackContainer
+    {
+        get { return _trackContainer; }
     }
 
     public IEnumerator Load()

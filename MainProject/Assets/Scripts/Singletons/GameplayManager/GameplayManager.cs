@@ -43,6 +43,7 @@ public class GameplayManager : SingletonComponent<GameplayManager>
     {
         LoadingPanel.Instance.Show();
         yield return _loader.LoadChapter(_chapter);
+        TrackManager.Instance.Load(_loader.Chapter.TrackContainer);
         ResetPlayer();
         LoadingPanel.Instance.Hide();
         _inGame = true;

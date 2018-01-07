@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : GameplayItem
+public class PlayerController : Character
 {
 
 }

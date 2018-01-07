@@ -212,7 +212,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Inventory
+  m_Text: Menu
 --- !u!114 &114648085630552086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,6 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c5dbf5f71b22f45b8f71610595ee78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isPausing: 0
   _inventoryButton: {fileID: 114438156134960954}
   _optionsButton: {fileID: 114933248588025362}
 --- !u!114 &114933248588025362
