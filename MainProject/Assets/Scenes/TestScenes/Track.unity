@@ -557,13 +557,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04a791d20312bb9478a622aa137fe518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _previousTrack: {fileID: 0}
   _currentTrack: {fileID: 0}
-  _gravity: 12.5
-  _jumpVelocity: 750
-  _fallMultiplier: 2.5
-  _lowToJumpMultiplier: 2
-  _move: 1000
+  _gravity: 9.62
+  _jumpVelocity: 650
+  _fallMultiplier: 3.5
+  _lowToJumpMultiplier: 2.5
   _isInAir: 1
+  _move: 500
 --- !u!1 &810459102
 GameObject:
   m_ObjectHideFlags: 0

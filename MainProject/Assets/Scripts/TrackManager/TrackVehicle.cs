@@ -60,14 +60,15 @@ public class TrackVehicle : MonoBehaviour
 
         if (_isInAir)
         {
-            if (_velocity.y < 0)
+            if (Input.GetKey(KeyCode.Space))
             {
-                _velocity.y -= Mathf.Abs(_gravity) * (_fallMultiplier);
+                _velocity.y -= Mathf.Abs(_gravity) * _lowToJumpMultiplier;
             }
-            else if (!Input.GetKey(KeyCode.Space))
+            else
             {
-                _velocity.y -= Mathf.Abs(_gravity) * (_lowToJumpMultiplier);
+                _velocity.y -= Mathf.Abs(_gravity) * _fallMultiplier;
             }
+
         }
 
         _predictedPosition = transform.position + _velocity * Time.deltaTime;
