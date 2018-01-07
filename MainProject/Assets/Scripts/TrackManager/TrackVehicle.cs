@@ -112,12 +112,4 @@ public class TrackVehicle : MonoBehaviour
 
         transform.position = _predictedPosition;
     }
-
-    private void Something(int i)
-    {
-        if (_currentTrack == null)
-        {
-            Debug.LogFormat("_currentTrack is null. {0}", i);
-        }
-    }
 }
