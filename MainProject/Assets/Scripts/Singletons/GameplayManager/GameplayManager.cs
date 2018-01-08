@@ -19,6 +19,21 @@ public class GameplayManager : SingletonComponent<GameplayManager>
         get { return _chapter; }
     }
 
+#if DEBUG_ON
+    public void OnGUI()
+    {
+        if (_loader.Chapter != null)
+        {
+            Rect rect = new Rect();
+            rect.width = Screen.width * 0.1f;
+            rect.height = 20f;
+            rect.x = 5f;
+            rect.y = 5f;
+            GUI.Label(rect, _chapter);
+        }
+    }
+#endif
+
     public override void Init()
     {
         base.Init();

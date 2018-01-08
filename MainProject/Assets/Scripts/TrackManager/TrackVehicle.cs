@@ -70,7 +70,7 @@ public class TrackVehicle : MonoBehaviour
 
         ApplyGravity();
 
-        _predictedPosition = transform.position + _velocity * Time.deltaTime;
+        _predictedPosition = transform.position + _velocity * CustomTime.fixedDeltaTime;
 
         transform.Translate(_velocity);
 
