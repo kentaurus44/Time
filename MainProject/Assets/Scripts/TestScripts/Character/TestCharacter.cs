@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestCharacter : Character
+public class TestCharacter : CharacterControl
 {
 	private void Update ()
     {
