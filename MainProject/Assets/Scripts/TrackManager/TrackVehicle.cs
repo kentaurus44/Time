@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class TrackVehicle : MonoBehaviour
 {
-    private const float kWallOffset = 0.1f;
-
     [SerializeField]
     protected BoxCollider2D _collider;
 
@@ -40,6 +38,8 @@ public class TrackVehicle : MonoBehaviour
     protected Vector3 _predictedPosition;
     protected Track _tempTrack;
 
+    protected MultiRaycastHit2D _horizontalRaycast = new MultiRaycastHit2D(MultiRaycastHit2D.Direction.Horizontal);
+
     public bool IsInAir
     {
         get { return _isInAir; }
@@ -54,9 +54,14 @@ public class TrackVehicle : MonoBehaviour
         }
     }
 
+    protected virtual void Start()
+    {
+        _horizontalRaycast.SetTransform(transform, _collider.offset);
+    }
+
     public virtual void Move(float direction)
     {
-        if (direction != 0f && !IsColliding(direction))
+        if (direction != 0f)
         {
             _velocity.x = _move * direction;
         }
@@ -74,11 +79,14 @@ public class TrackVehicle : MonoBehaviour
 
     public virtual void OnUpdate()
     {
-        _tempTrack = TrackManager.Instance.GetLandingTrack(transform);
-        if (_currentTrack == null || _tempTrack != null && _tempTrack != _currentTrack)
+        if (_isInAir)
         {
-            _previousTrack = _currentTrack;
-            _currentTrack = _tempTrack;
+            _tempTrack = TrackManager.Instance.GetLandingTrack(transform);
+            if (_currentTrack == null || _tempTrack != null && _tempTrack != _currentTrack)
+            {
+                _previousTrack = _currentTrack;
+                _currentTrack = _tempTrack;
+            }
         }
 
         ApplyGravity();
@@ -97,30 +105,26 @@ public class TrackVehicle : MonoBehaviour
             if (_velocity.x != 0)
             {
                 float sign = Mathf.Sign(_velocity.x);
-                if (IsColliding(sign))
+                _horizontalRaycast.Raycast(sign, _collider.size.y, (_collider.size.x / 2f),  1 << LayerMask.NameToLayer("Wall"));
+
+                if (_horizontalRaycast.IsColliding)
                 {
                     if (sign > 0)
                     {
-                        _predictedPosition.x = CollisionPoint(sign).x - (_collider.size.x / 2f) - kWallOffset;
+                        _predictedPosition.x = _horizontalRaycast.Point.x - (_collider.size.x / 2f) - MultiRaycastHit2D.kWallOffset;
                     }
                     else if (sign < 0)
                     {
-                        _predictedPosition.x = (_collider.size.x / 2f) - CollisionPoint(sign).x - kWallOffset;
+                        _predictedPosition.x = _horizontalRaycast.Point.x + (_collider.size.x / 2f) + MultiRaycastHit2D.kWallOffset;
                     }
+
                     _velocity.x = 0f;
                 }
             }
 
             if (_isInAir)
             {
-                float floor = _currentTrack.GetFloor(_predictedPosition.x);
-
-                if (Mathf.Abs(floor - _predictedPosition.y) < 1f || _predictedPosition.y < floor)
-                {
-                    _predictedPosition.y = GetHeight();
-                    _velocity.y = 0;
-                    _isInAir = false;
-                }
+                CheckAirCollision();
             }
             else if (!_currentTrack.IsOnTrack(_predictedPosition))
             {
@@ -133,6 +137,18 @@ public class TrackVehicle : MonoBehaviour
         }
 
         transform.position = _predictedPosition;
+    }
+
+    protected virtual void CheckAirCollision()
+    {
+        float floor = _currentTrack.GetFloor(_predictedPosition.x);
+
+        if (Mathf.Abs(floor - _predictedPosition.y) < 1f || _predictedPosition.y < floor)
+        {
+            _predictedPosition.y = GetHeight();
+            _velocity.y = 0;
+            _isInAir = false;
+        }
     }
 
     protected virtual void ApplyGravity()
@@ -157,22 +173,5 @@ public class TrackVehicle : MonoBehaviour
     protected float GetHeight()
     {
         return _currentTrack.GetFloor(_predictedPosition.x) + 0.01f;
-    }
-
-    private Vector2 CollisionPoint(float direction)
-    {
-        RaycastHit2D hit = CheckCollision(direction);
-        return hit.point;
-    }
-
-    private bool IsColliding(float direction)
-    {
-        RaycastHit2D hit = CheckCollision(direction);
-        return hit.collider != null && hit.distance <= kWallOffset + (_collider.size.x /2f * direction);
-    }
-
-    private RaycastHit2D CheckCollision(float direction)
-    {
-        return Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y) + _collider.offset, Vector2.right * direction, kWallOffset + (_collider.size.x / 2f * direction), 1 << LayerMask.NameToLayer("Wall"));
     }
 }
