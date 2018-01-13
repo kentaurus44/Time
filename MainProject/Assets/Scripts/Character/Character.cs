@@ -5,11 +5,15 @@ using UnityEngine;
 public class Character : GameplayItem
 {
     [SerializeField]
-    protected TrackVehicle _trackVehicule;
+    protected TrackVehicle _trackVehicle;
+
+    public virtual void Init()
+    {
+    }
 
     public override void OnUpdate()
     {
         base.OnUpdate();
-        _trackVehicule.OnUpdate();
+        _trackVehicle.OnUpdate();
     }
 }

@@ -18,7 +18,7 @@ public class TrackControlVehicle : TrackVehicle
         {
             if (_velocity.y > 0 && Input.GetKey(KeyCode.Space))
             {
-                _velocity.y -= Mathf.Abs(_gravity) * _lowToJumpMultiplier;
+                _velocity.y -= Mathf.Abs(Settings.Gravity) * Settings.LowToJumpMultiplier;
             }
             else
             {
@@ -29,12 +29,15 @@ public class TrackControlVehicle : TrackVehicle
 
     protected override void CheckAirCollision()
     {
-        _verticalRaycast.Raycast(1f, _collider.size.x, (_collider.size.y), 1 << LayerMask.NameToLayer("Ceiling"));
-
-        if (_verticalRaycast.IsColliding)
+        if (_velocity.y > 0)
         {
-            _predictedPosition.y = _verticalRaycast.Point.y - (_collider.size.y) - MultiRaycastHit2D.kWallOffset;
-            _velocity.y = 0;
+            _verticalRaycast.Raycast(1f, _collider.size.x, (_collider.size.y), 1 << LayerMask.NameToLayer("Ceiling"));
+
+            if (_verticalRaycast.IsColliding)
+            {
+                _predictedPosition.y = _verticalRaycast.Point.y - (_collider.size.y) - MultiRaycastHit2D.kWallOffset;
+                _velocity.y = 0;
+            }
         }
 
         base.CheckAirCollision();

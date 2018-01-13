@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class TestCharacter : CharacterControl
 {
-	private void Update ()
+    [SerializeField]
+    PlayerConfigs _playerConfigs;
+
+    private void Update ()
     {
+        _trackVehicle.LoadSettings(_playerConfigs.VehicleSettings);
         OnUpdate();
 	}
 }

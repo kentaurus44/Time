@@ -2,17 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrackVehicle : MonoBehaviour
+[System.Serializable]
+public class VehicleSettings
 {
-    [SerializeField]
-    protected BoxCollider2D _collider;
-
-    [Header("Tracks")]
-    [SerializeField]
-    protected Track _previousTrack;
-    [SerializeField]
-    protected Track _currentTrack;
-
     [Header("Gravity")]
     [SerializeField]
     protected float _gravity = 9.62f;
@@ -25,12 +17,51 @@ public class TrackVehicle : MonoBehaviour
     [SerializeField]
     protected float _jumpVelocity = 650f;
 
-    [SerializeField]
-    protected bool _isInAir = false;
-
     [Header("Movement")]
     [SerializeField]
     protected float _move = 100f;
+
+    public float Gravity
+    {
+        get { return _gravity; }
+    }
+
+    public float FallMultiplier
+    {
+        get { return _fallMultiplier; }
+    }
+
+    public float LowToJumpMultiplier
+    {
+        get { return _lowToJumpMultiplier; }
+    }
+
+    public float JumpVelocity
+    {
+        get { return _jumpVelocity; }
+    }
+
+    public float Move
+    {
+        get { return _move; }
+    }
+}
+
+public class TrackVehicle : MonoBehaviour
+{
+    [SerializeField]
+    protected BoxCollider2D _collider;
+
+    [Header("Tracks")]
+    [SerializeField]
+    protected Track _previousTrack;
+    [SerializeField]
+    protected Track _currentTrack;
+
+    
+    [SerializeField]
+    protected bool _isInAir = false;
+
     [SerializeField]
     protected bool _switchTrackAtEnd = true;
 
@@ -39,6 +70,12 @@ public class TrackVehicle : MonoBehaviour
     protected Track _tempTrack;
 
     protected MultiRaycastHit2D _horizontalRaycast = new MultiRaycastHit2D(MultiRaycastHit2D.Direction.Horizontal);
+    private VehicleSettings _settings;
+
+    public virtual VehicleSettings Settings
+    {
+        get { return _settings; }
+    }
 
     public bool IsInAir
     {
@@ -59,11 +96,16 @@ public class TrackVehicle : MonoBehaviour
         _horizontalRaycast.SetTransform(transform, _collider.offset);
     }
 
+    public virtual void LoadSettings(VehicleSettings settings)
+    {
+        _settings = settings;
+    }
+
     public virtual void Move(float direction)
     {
         if (direction != 0f)
         {
-            _velocity.x = _move * direction;
+            _velocity.x = Settings.Move * direction;
         }
         else
         {
@@ -73,7 +115,7 @@ public class TrackVehicle : MonoBehaviour
 
     public virtual void Jump()
     {
-        _velocity.y = _jumpVelocity;
+        _velocity.y = Settings.JumpVelocity;
         _isInAir = true;
     }
 
@@ -87,9 +129,9 @@ public class TrackVehicle : MonoBehaviour
                 _previousTrack = _currentTrack;
                 _currentTrack = _tempTrack;
             }
-        }
 
-        ApplyGravity();
+            ApplyGravity();
+        }
 
         transform.Translate(_velocity * CustomTime.fixedDeltaTime);
         _predictedPosition = transform.position;
@@ -153,7 +195,7 @@ public class TrackVehicle : MonoBehaviour
 
     protected virtual void ApplyGravity()
     {
-        _velocity.y -= Mathf.Abs(_gravity) * _fallMultiplier;
+        _velocity.y -= Mathf.Abs(Settings.Gravity) * Settings.FallMultiplier;
     }
 
     protected virtual void SwitchTracks()

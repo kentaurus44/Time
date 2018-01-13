@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 98084770}
   - component: {fileID: 98084769}
   - component: {fileID: 98084768}
+  - component: {fileID: 98084771}
   m_Layer: 0
   m_Name: TestRoomba
   m_TagString: Untagged
@@ -141,14 +142,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04a791d20312bb9478a622aa137fe518, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 98084771}
   _previousTrack: {fileID: 0}
   _currentTrack: {fileID: 1294333107}
-  _gravity: 9.62
-  _fallMultiplier: 1.5
-  _lowToJumpMultiplier: 1
-  _jumpVelocity: 650
   _isInAir: 0
-  _move: 100
   _switchTrackAtEnd: 0
 --- !u!114 &98084769
 MonoBehaviour:
@@ -161,7 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2873e0b244c160642865d6f04c357013, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trackVehicule: {fileID: 98084768}
+  _trackVehicle: {fileID: 98084768}
+  _roombasConfigs: {fileID: 11400000, guid: d3a71511dd3dc0a4eb43c77590e79033, type: 2}
 --- !u!4 &98084770
 Transform:
   m_ObjectHideFlags: 0
@@ -176,6 +174,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &98084771
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 98084767}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 50}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 100, y: 100}
+  m_EdgeRadius: 0
 --- !u!1001 &423682838
 Prefab:
   m_ObjectHideFlags: 0
@@ -435,7 +458,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1515922678}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 50, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 1}
   m_Children: []
   m_Father: {fileID: 98084770}

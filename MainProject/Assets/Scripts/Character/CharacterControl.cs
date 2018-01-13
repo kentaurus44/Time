@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class CharacterControl : Character
 {
+    public override void Init()
+    {
+        base.Init();
+        _trackVehicle.LoadSettings(DatabaseManager.Instance.PlayerConfigs.VehicleSettings);
+    }
+
     public override void OnUpdate()
     {
         if (Input.GetKey(KeyCode.D))
         {
-            _trackVehicule.Move(1f);
+            _trackVehicle.Move(1f);
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            _trackVehicule.Move(-1f);
+            _trackVehicle.Move(-1f);
         }
         else
         {
-            _trackVehicule.Move(0f);
+            _trackVehicle.Move(0f);
         }
 
-        if (!_trackVehicule.IsInAir && Input.GetKeyDown(KeyCode.Space))
+        if (!_trackVehicle.IsInAir && Input.GetKeyDown(KeyCode.Space))
         {
-            _trackVehicule.Jump();
+            _trackVehicle.Jump();
         }
 
         base.OnUpdate();

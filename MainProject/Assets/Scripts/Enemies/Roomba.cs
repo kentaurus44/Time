@@ -17,7 +17,7 @@ public class Roomba : Character
 
     public override void OnUpdate()
     {
-        if (_trackVehicule.IsInAir)
+        if (_trackVehicle.IsInAir)
         {
             _currentState = States.Falling;
         }
@@ -29,14 +29,14 @@ public class Roomba : Character
         switch (_currentState)
         {
             case States.Falling:
-                _trackVehicule.Move(0f);
+                _trackVehicle.Move(0f);
                 break;
             case States.Patrol:
-                if (_trackVehicule.IsAtEnd)
+                if (_trackVehicle.IsAtEnd)
                 {
                     _direction *= -1f;
                 }
-                _trackVehicule.Move(_direction);
+                _trackVehicle.Move(_direction);
                 break;
             case States.PrefightRitual:
                 break;

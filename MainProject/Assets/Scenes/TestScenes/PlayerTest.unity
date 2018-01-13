@@ -146,12 +146,7 @@ MonoBehaviour:
   _collider: {fileID: 98084771}
   _previousTrack: {fileID: 0}
   _currentTrack: {fileID: 0}
-  _gravity: 9.62
-  _fallMultiplier: 5
-  _lowToJumpMultiplier: 2.5
-  _jumpVelocity: 650
   _isInAir: 1
-  _move: 500
   _switchTrackAtEnd: 1
 --- !u!114 &98084769
 MonoBehaviour:
@@ -164,7 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36a2b317a775b6f45ab2bfd3a80a0b83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trackVehicule: {fileID: 98084768}
+  _trackVehicle: {fileID: 98084768}
+  _playerConfigs: {fileID: 11400000, guid: a1e1b8f4e9e2afd41ace421c4ddd0b48, type: 2}
 --- !u!4 &98084770
 Transform:
   m_ObjectHideFlags: 0
@@ -457,7 +453,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 671234359}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71, y: 178, z: 0}
+  m_LocalPosition: {x: 218, y: 218, z: 0}
   m_LocalScale: {x: 260, y: 260, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
