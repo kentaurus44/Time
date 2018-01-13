@@ -20,6 +20,9 @@ public class VehicleSettings
     [Header("Movement")]
     [SerializeField]
     protected float _move = 100f;
+    [SerializeField]
+    protected bool _switchTrackAtEdge = true;
+
 
     public float Gravity
     {
@@ -45,6 +48,11 @@ public class VehicleSettings
     {
         get { return _move; }
     }
+
+    public bool SwitchTrackAtEdge
+    {
+        get { return _switchTrackAtEdge; }
+    }
 }
 
 public class TrackVehicle : MonoBehaviour
@@ -61,9 +69,6 @@ public class TrackVehicle : MonoBehaviour
     
     [SerializeField]
     protected bool _isInAir = false;
-
-    [SerializeField]
-    protected bool _switchTrackAtEnd = true;
 
     protected Vector3 _velocity;
     protected Vector3 _predictedPosition;
@@ -82,12 +87,19 @@ public class TrackVehicle : MonoBehaviour
         get { return _isInAir; }
     }
 
-    public bool IsAtEnd
+    public float Ratio
     {
         get
         {
-            float ratio = _currentTrack.GetRatio(transform.position.x);
-            return ratio <= 0.05f || ratio >= 0.95f;
+            return _currentTrack.GetRatio(transform.position.x);
+        }
+    }
+
+    public Vector3 Velocity
+    {
+        get
+        {
+            return _velocity;
         }
     }
 
@@ -142,28 +154,28 @@ public class TrackVehicle : MonoBehaviour
             _previousTrack = _currentTrack;
         }
 
+        if (_velocity.x != 0)
+        {
+            float sign = Mathf.Sign(_velocity.x);
+            _horizontalRaycast.Raycast(sign, _collider.size.y, (_collider.size.x / 2f), 1 << LayerMask.NameToLayer("Wall"));
+
+            if (_horizontalRaycast.IsColliding)
+            {
+                if (sign > 0)
+                {
+                    _predictedPosition.x = _horizontalRaycast.Point.x - (_collider.size.x / 2f) - MultiRaycastHit2D.kWallOffset;
+                }
+                else if (sign < 0)
+                {
+                    _predictedPosition.x = _horizontalRaycast.Point.x + (_collider.size.x / 2f) + MultiRaycastHit2D.kWallOffset;
+                }
+
+                _velocity.x = 0f;
+            }
+        }
+
         if (_currentTrack != null)
         {
-            if (_velocity.x != 0)
-            {
-                float sign = Mathf.Sign(_velocity.x);
-                _horizontalRaycast.Raycast(sign, _collider.size.y, (_collider.size.x / 2f),  1 << LayerMask.NameToLayer("Wall"));
-
-                if (_horizontalRaycast.IsColliding)
-                {
-                    if (sign > 0)
-                    {
-                        _predictedPosition.x = _horizontalRaycast.Point.x - (_collider.size.x / 2f) - MultiRaycastHit2D.kWallOffset;
-                    }
-                    else if (sign < 0)
-                    {
-                        _predictedPosition.x = _horizontalRaycast.Point.x + (_collider.size.x / 2f) + MultiRaycastHit2D.kWallOffset;
-                    }
-
-                    _velocity.x = 0f;
-                }
-            }
-
             if (_isInAir)
             {
                 CheckAirCollision();
@@ -200,7 +212,7 @@ public class TrackVehicle : MonoBehaviour
 
     protected virtual void SwitchTracks()
     {
-        if (_switchTrackAtEnd)
+        if (Settings.SwitchTrackAtEdge)
         {
             _previousTrack = _currentTrack;
             _currentTrack = _currentTrack.GetNewTrack(_predictedPosition);

@@ -7,8 +7,9 @@ public partial class DatabaseManager
     [SerializeField]
     protected PlayerConfigs _playerConfigs;
 
-    public PlayerConfigs PlayerConfigs
-    {
-        get { return _playerConfigs; }
-    }
+    [SerializeField]
+    protected CameraConfigs _cameraConfigs;
+
+    public PlayerConfigs PlayerConfigs { get { return _playerConfigs; } }
+    public CameraConfigs CameraConfigs { get { return _cameraConfigs; } }
 }

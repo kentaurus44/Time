@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class CharacterControl : Character
 {
+    public Action<Vector3, Vector3> OnPlayerMoved;
+
     public override void Init()
     {
         base.Init();
@@ -31,5 +33,7 @@ public class CharacterControl : Character
         }
 
         base.OnUpdate();
+
+        OnPlayerMoved.SafeInvoke(_trackVehicle.Velocity, transform.position);
     }
 }

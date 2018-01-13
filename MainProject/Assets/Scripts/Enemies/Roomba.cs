@@ -15,6 +15,15 @@ public class Roomba : Character
     private States _currentState = States.Falling;
     private float _direction = 1f;
 
+    private bool IsAtEnd
+    {
+        get
+        {
+            float ratio = _trackVehicle.Ratio;
+            return ratio <= 0.05f || ratio >= 0.95f;
+        }
+    }
+
     public override void OnUpdate()
     {
         if (_trackVehicle.IsInAir)
@@ -32,7 +41,7 @@ public class Roomba : Character
                 _trackVehicle.Move(0f);
                 break;
             case States.Patrol:
-                if (_trackVehicle.IsAtEnd)
+                if (IsAtEnd)
                 {
                     _direction *= -1f;
                 }
