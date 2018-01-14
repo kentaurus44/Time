@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+[RequireComponent(typeof(TrackEditorScript))]
+#endif
 public class Track : MonoBehaviour
 {
     [SerializeField]
@@ -16,7 +19,30 @@ public class Track : MonoBehaviour
     [SerializeField]
     protected Transform _end;
 
+    public Transform BeginPoint
+    {
+        get { return _begin; }
+    }
+
+    public Transform EndPoint
+    {
+        get { return _end; }
+    }
+
+
 #if UNITY_EDITOR
+    public Track LeftConnector
+    {
+        get { return _leftConnector; }
+        set { _leftConnector = value; }
+    }
+
+    public Track RightConnector
+    {
+        get { return _rightConnector; }
+        set { _rightConnector = value; }
+    }
+
     protected virtual void OnDrawGizmos()
     {
         if (_begin && _end)

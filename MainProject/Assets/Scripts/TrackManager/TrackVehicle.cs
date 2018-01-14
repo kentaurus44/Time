@@ -157,7 +157,7 @@ public class TrackVehicle : MonoBehaviour
         if (_velocity.x != 0)
         {
             float sign = Mathf.Sign(_velocity.x);
-            _horizontalRaycast.Raycast(sign, _collider.size.y, (_collider.size.x / 2f), 1 << LayerMask.NameToLayer("Wall"));
+            _horizontalRaycast.Raycast(sign, _collider.size.y, (_collider.size.x / 2f), 1 << LayerMask.NameToLayer("Wall"), 0);
 
             if (_horizontalRaycast.IsColliding)
             {

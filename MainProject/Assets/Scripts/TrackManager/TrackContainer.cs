@@ -41,4 +41,11 @@ public class TrackContainer : MonoBehaviour
 
         return closest;
     }
+
+#if UNITY_EDITOR
+    public void LoadTracks()
+    {
+        _tracks = GetComponentsInChildren<Track>();
+    }
+#endif
 }

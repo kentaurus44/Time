@@ -31,7 +31,7 @@ public class TrackControlVehicle : TrackVehicle
     {
         if (_velocity.y > 0)
         {
-            _verticalRaycast.Raycast(1f, _collider.size.x, (_collider.size.y), 1 << LayerMask.NameToLayer("Ceiling"));
+            _verticalRaycast.Raycast(1f, _collider.size.x, (_collider.size.y), 1 << LayerMask.NameToLayer("Ceiling"), 0);
 
             if (_verticalRaycast.IsColliding)
             {
