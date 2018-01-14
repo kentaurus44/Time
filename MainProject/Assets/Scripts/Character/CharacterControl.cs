@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 public class CharacterControl : Character
 {
-    public Action<Vector3, Vector3> OnPlayerMoved;
+    public Action<Vector3, Vector3, bool> OnPlayerMoved;
 
     public override void Init()
     {
@@ -34,6 +34,6 @@ public class CharacterControl : Character
 
         base.OnUpdate();
 
-        OnPlayerMoved.SafeInvoke(_trackVehicle.Velocity, transform.position);
+        OnPlayerMoved.SafeInvoke(_trackVehicle.Velocity, transform.position, _trackVehicle.IsInAir);
     }
 }

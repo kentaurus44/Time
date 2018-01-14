@@ -1071,6 +1071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _character: {fileID: 98084769}
+  _cameraConfigs: {fileID: 11400000, guid: 341d1048b8b8f9847977e6e276360872, type: 2}
 --- !u!1 &2005602964
 GameObject:
   m_ObjectHideFlags: 0
