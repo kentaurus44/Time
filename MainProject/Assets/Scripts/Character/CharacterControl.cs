@@ -10,6 +10,10 @@ public class CharacterControl : Character
     {
         base.Init();
         _trackVehicle.LoadSettings(DatabaseManager.Instance.PlayerConfigs.VehicleSettings);
+        CameraConfigs _cameraConfigs = DatabaseManager.Instance.CameraConfigs;
+        CustomCamera.CameraManager.Instance.MainCameraController.Init(_cameraConfigs.X, _cameraConfigs.Y);
+        OnPlayerMoved += CustomCamera.CameraManager.Instance.MainCameraController.OnPlayerMoved;
+
     }
 
     public override void OnUpdate()

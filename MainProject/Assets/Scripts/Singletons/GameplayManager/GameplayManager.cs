@@ -50,6 +50,7 @@ public class GameplayManager : SingletonComponent<GameplayManager>
 
     public void Load(string chapter)
     {
+        _playerController.Init();
         _chapter = chapter;
         StartCoroutine(LoadChapter());
     }
