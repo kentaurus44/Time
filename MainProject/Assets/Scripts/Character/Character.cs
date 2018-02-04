@@ -7,6 +7,12 @@ public class Character : GameplayItem
     [SerializeField]
     protected TrackVehicle _trackVehicle;
 
+    public TrackVehicle Vehicle
+    {
+        get { return _trackVehicle; }
+    }
+
+
     public virtual void Init()
     {
     }
