@@ -11,3 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be814b018575c5244a7b3926e1a44d6e, type: 3}
   m_Name: JSONDatabase
   m_EditorClassIdentifier: 
+  _eventsJSON: {fileID: 4900000, guid: 9ed488e4c2615824cb7d2782965bcd0f, type: 3}
+  _dialogsJSON: {fileID: 4900000, guid: 37ec7731b1b29ad4ba839dce9b848e14, type: 3}
+  _chaptersJSON: {fileID: 4900000, guid: 4f190cd1d01aa864482c9ec53bb96774, type: 3}

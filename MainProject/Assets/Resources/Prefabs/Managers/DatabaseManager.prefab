@@ -53,3 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerConfigs: {fileID: 11400000, guid: a1e1b8f4e9e2afd41ace421c4ddd0b48, type: 2}
   _cameraConfigs: {fileID: 11400000, guid: 341d1048b8b8f9847977e6e276360872, type: 2}
+  _jsonDatabase: {fileID: 11400000, guid: 3c663cf338148e042b793dbaa5551150, type: 2}
