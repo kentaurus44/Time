@@ -12,4 +12,10 @@ public partial class DatabaseManager
 
     public PlayerConfigs PlayerConfigs { get { return _playerConfigs; } }
     public CameraConfigs CameraConfigs { get { return _cameraConfigs; } }
+
+    // Database
+    [SerializeField]
+    protected JSONDatabase _jsonDatabase;
+
+    public JSONDatabase JsonDatabase { get { return _jsonDatabase; } }
 }
