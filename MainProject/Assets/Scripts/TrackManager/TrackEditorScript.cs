@@ -1,13 +1,38 @@
 ﻿#if UNITY_EDITOR
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class TrackEditorScript : MonoBehaviour
 {
-    private Track _track;
+#if UNITY_EDITOR
+	private Track _track;
+
+    protected virtual void OnDrawGizmos()
+    {
+        if (_track.BeginPoint && _track.EndPoint)
+        {
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(_track.BeginPoint.position, _track.EndPoint.position);
+        }
+
+        if (_track.VisibleSettings != null)
+        {
+            if (_track.VisibleSettings.Width == 0)
+            {
+				CalculateCenter();
+            }
+
+            Gizmos.color = Color.blue;
+            Vector3 center = _track.VisibleSettings.Center;
+            float extendWidth = _track.VisibleSettings.Width / 2f;
+            float extendHeight = _track.VisibleSettings.Height / 2f;
+            Gizmos.DrawLine(center + new Vector3(extendWidth, extendHeight), center + new Vector3(extendWidth, -extendHeight));
+            Gizmos.DrawLine(center + new Vector3(-extendWidth, extendHeight), center + new Vector3(-extendWidth, -extendHeight));
+            Gizmos.DrawLine(center + new Vector3(-extendWidth, -extendHeight), center + new Vector3(extendWidth, -extendHeight));
+            Gizmos.DrawLine(center + new Vector3(-extendWidth, extendHeight), center + new Vector3(extendWidth, extendHeight));
+        }
+    }
 
     private void OnEnable()
     {
@@ -34,5 +59,14 @@ public class TrackEditorScript : MonoBehaviour
             _track.RightConnector.LeftConnector = _track;
         }
     }
-}
+
+    public void CalculateCenter()
+    {
+        _track.VisibleSettings.Width = _track.EndPoint.localPosition.x - _track.BeginPoint.localPosition.x;
+        Vector3 position = _track.VisibleSettings.Center;
+        position.x = _track.EndPoint.position.x - (_track.VisibleSettings.Width / 2f);
+        position.y = (_track.EndPoint.position.y - _track.BeginPoint.position.y) / 2f + _track.BeginPoint.position.y;
+        _track.VisibleSettings.Center = position;
+    }
 #endif
+}

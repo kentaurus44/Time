@@ -19,6 +19,9 @@ public class Track : MonoBehaviour
     [SerializeField]
     protected Transform _end;
 
+    [SerializeField]
+    protected TrackManager.VisibleSettings _visibleSettings = new TrackManager.VisibleSettings();
+
     public Transform BeginPoint
     {
         get { return _begin; }
@@ -29,6 +32,10 @@ public class Track : MonoBehaviour
         get { return _end; }
     }
 
+    public TrackManager.VisibleSettings VisibleSettings
+    {
+        get { return _visibleSettings; }
+    }
 
 #if UNITY_EDITOR
     public Track LeftConnector
@@ -41,14 +48,6 @@ public class Track : MonoBehaviour
     {
         get { return _rightConnector; }
         set { _rightConnector = value; }
-    }
-
-    protected virtual void OnDrawGizmos()
-    {
-        if (_begin && _end)
-        {
-            Gizmos.DrawLine(_begin.position, _end.position);
-        }
     }
 #endif
 
