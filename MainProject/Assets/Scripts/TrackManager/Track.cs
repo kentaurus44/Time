@@ -14,6 +14,7 @@ public class Track : MonoBehaviour
 	#endregion
 
 	#region Serialization
+	[Header("Track")]
 	[SerializeField]
     protected Track _leftConnector;
 
