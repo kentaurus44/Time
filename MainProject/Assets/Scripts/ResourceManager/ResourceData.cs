@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ResourceData
+[System.Serializable]
+public abstract class ResourceData : MonoBehaviour
 {
 	[SerializeField]
 	private string _id = string.Empty;
@@ -14,6 +15,7 @@ public abstract class ResourceData
 	public abstract object Get(int index);
 }
 
+[System.Serializable]
 public class ResourceData<T> : ResourceData where T : Object
 {
 	[SerializeField]
