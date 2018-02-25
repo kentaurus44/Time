@@ -14,6 +14,6 @@ public class LevelController : MonoBehaviour
 
 	public void OnItemLoaded(string item)
 	{
-		Debug.LogError(item);
+		Debug.Log(item);
 	}
 }

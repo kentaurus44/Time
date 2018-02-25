@@ -33,7 +33,7 @@ public class ResourceManager : SingletonComponent<ResourceManager>
 		}
 		else
 		{
-			Debug.LogErrorFormat("Item {0} was not found.", item);
+			Debug.LogWarningFormat("Item {0} was not found.", item);
 		}
 
 		return null;
