@@ -141,6 +141,46 @@ Transform:
   m_Father: {fileID: 1532102722}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &383746507
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 383746509}
+  - component: {fileID: 383746508}
+  m_Layer: 0
+  m_Name: ResourceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &383746508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 383746507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f51e31868fb144dbce4e4fcf91cb78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &383746509
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 383746507}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 532.6612, y: 24.455051, z: -10.141289}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &676171937
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +192,7 @@ GameObject:
   - component: {fileID: 676171938}
   - component: {fileID: 676171940}
   - component: {fileID: 676171941}
+  - component: {fileID: 676171942}
   m_Layer: 0
   m_Name: Track (1)
   m_TagString: Untagged
@@ -167,7 +208,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 676171937}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7aeb877f0c7774299312b1b743b71f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f60eb0f67a537444b3d5f27d5b7ad2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftConnector: {fileID: 0}
@@ -175,6 +216,7 @@ MonoBehaviour:
   _begin: {fileID: 960260192}
   _end: {fileID: 883880158}
   _boxCollider2D: {fileID: 676171941}
+  _trackObjectController: {fileID: 676171942}
 --- !u!4 &676171939
 Transform:
   m_ObjectHideFlags: 0
@@ -226,6 +268,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 847, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &676171942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 676171937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65968a6c001f8a94f81fdfadd1c82d7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trackObjects: []
 --- !u!1 &859598776
 GameObject:
   m_ObjectHideFlags: 0
@@ -453,6 +507,7 @@ GameObject:
   - component: {fileID: 1532102721}
   - component: {fileID: 1532102723}
   - component: {fileID: 1532102724}
+  - component: {fileID: 1532102725}
   m_Layer: 0
   m_Name: Track
   m_TagString: Untagged
@@ -468,7 +523,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1532102720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a7aeb877f0c7774299312b1b743b71f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f60eb0f67a537444b3d5f27d5b7ad2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _leftConnector: {fileID: 676171938}
@@ -476,6 +531,7 @@ MonoBehaviour:
   _begin: {fileID: 24573602}
   _end: {fileID: 1109253672}
   _boxCollider2D: {fileID: 1532102724}
+  _trackObjectController: {fileID: 1532102725}
 --- !u!4 &1532102722
 Transform:
   m_ObjectHideFlags: 0
@@ -527,6 +583,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 847, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1532102725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1532102720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65968a6c001f8a94f81fdfadd1c82d7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _trackObjects: []
 --- !u!1001 &1809797400
 Prefab:
   m_ObjectHideFlags: 0
