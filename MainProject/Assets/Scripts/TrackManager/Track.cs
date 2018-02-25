@@ -1,13 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 #if UNITY_EDITOR
 [RequireComponent(typeof(TrackEditorScript))]
 #endif
 public class Track : MonoBehaviour
 {
-    [SerializeField]
+	#region Events
+	public Action OnTrackEnterScreen;
+	public Action OnTrackExitScreen;
+	#endregion
+
+	#region Serialization
+	[SerializeField]
     protected Track _leftConnector;
 
     [SerializeField]
@@ -19,7 +26,12 @@ public class Track : MonoBehaviour
     [SerializeField]
     protected Transform _end;
 
-    public Transform BeginPoint
+    [SerializeField]
+    protected BoxCollider2D _boxCollider2D;
+	#endregion
+
+	#region Get/Set
+	public Transform BeginPoint
     {
         get { return _begin; }
     }
@@ -29,6 +41,10 @@ public class Track : MonoBehaviour
         get { return _end; }
     }
 
+    public BoxCollider2D BoxCollider
+    {
+        get { return _boxCollider2D; }
+    }
 
 #if UNITY_EDITOR
     public Track LeftConnector
@@ -42,17 +58,23 @@ public class Track : MonoBehaviour
         get { return _rightConnector; }
         set { _rightConnector = value; }
     }
-
-    protected virtual void OnDrawGizmos()
-    {
-        if (_begin && _end)
-        {
-            Gizmos.DrawLine(_begin.position, _end.position);
-        }
-    }
 #endif
+	#endregion
 
-    public bool AreNeighbors(Track track)
+	#region Unity Methods
+	protected void OnTriggerEnter2D(Collider2D other)
+	{
+		OnTrackEnterScreen.SafeInvoke();
+	}
+
+	protected void OnTriggerExit2D(Collider2D other)
+	{
+		OnTrackExitScreen.SafeInvoke();
+	}
+	#endregion
+
+	#region Public Method
+	public bool AreNeighbors(Track track)
     {
         return track == _leftConnector || track == _rightConnector;
     }
@@ -89,4 +111,5 @@ public class Track : MonoBehaviour
     {
         return (x - _begin.position.x) / (_end.position.x - _begin.position.x);
     }
+	#endregion
 }

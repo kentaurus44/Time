@@ -21,5 +21,10 @@ public class TrackEditorScriptEditor : Editor
         {
             _container.SnapToRight();
         }
+
+		if (GUILayout.Button("Calculate Collider"))
+		{
+			_container.CalculateCollider();
+		}
     }
 }
