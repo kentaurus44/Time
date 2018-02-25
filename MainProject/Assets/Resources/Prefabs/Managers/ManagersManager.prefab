@@ -107,9 +107,7 @@ MonoBehaviour:
   - {fileID: 114279179144234358, guid: 011bdaa0b7cd8044597f317b99027a79, type: 2}
   - {fileID: 114501242404260124, guid: bca8c12fbb067ff489430bd1828beb18, type: 2}
   - {fileID: 114034450211848826, guid: 5c7f975ffcc16ef48980ebd75df04f0a, type: 2}
-  _eventsJSON: {fileID: 4900000, guid: 9ed488e4c2615824cb7d2782965bcd0f, type: 3}
-  _dialogsJSON: {fileID: 4900000, guid: 37ec7731b1b29ad4ba839dce9b848e14, type: 3}
-  _chaptersJSON: {fileID: 4900000, guid: 4f190cd1d01aa864482c9ec53bb96774, type: 3}
+  - {fileID: 114826772998177886, guid: 30a1a2a82cab59249a88279030e8872c, type: 2}
 --- !u!114 &114882811787363324
 MonoBehaviour:
   m_ObjectHideFlags: 1
