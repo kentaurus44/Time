@@ -5,10 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "FlowDatabase", menuName = "Database/FlowManager/FlowDatabase", order = 1)]
 public class FlowDatabase : Database<FlowDatabase>
 {
+	public const string kOpen = "OPEN";
+	public const string kClose = "CLOSE";
+
 	public static readonly string[] kFlowActions = new string[]
 	{
-		"OPEN",
-		"CLOSE"
+		kOpen,
+		kClose
 	};
 
 	[System.Serializable]

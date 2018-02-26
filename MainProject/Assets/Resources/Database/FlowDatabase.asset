@@ -13,6 +13,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FlowDatabase
   _views:
   - _id: MainPanel
-    _isPopup: 1
-  - _id: MainPanel2
-    _isPopup: 1
+    _isPopup: 0
+  - _id: GameScene
+    _isPopup: 0

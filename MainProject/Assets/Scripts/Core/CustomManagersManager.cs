@@ -19,10 +19,9 @@ public class CustomManagersManager : ManagersManager
 	{
 		base.OnSingletonLoaded(id);
 
-		if (id == "FlowManager")
+		if (id == typeof(FlowManager).Name)
 		{
-			FlowManager.Instance.Open("MainPanel");
+			FlowManager.Instance.TriggerAction(FlowDatabase.kOpen, "MainPanel");
 		}
-
 	}
 }

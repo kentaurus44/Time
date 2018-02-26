@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694a559f4384af74c98b3c8cb07641a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _configs: {fileID: 11400000, guid: f1f615d631ee3c74ea6a290edc8de2be, type: 2}
+  _database: {fileID: 11400000, guid: d83890a025c56be4d99399b09330bfee, type: 2}
   _canvas: {fileID: 223645451835996358}
 --- !u!114 &114885386901636770
 MonoBehaviour:

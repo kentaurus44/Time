@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class FlowManager : SingletonComponent<FlowManager>
 {
@@ -18,7 +19,7 @@ public class FlowManager : SingletonComponent<FlowManager>
 	public bool IsLoading { get { return _coroutine != null; } }
 	public View CurrentView { get { return _currentView; } }
 
-	public void Open(string scene)
+	private void Open(string scene)
 	{
 		FlowDatabase.View view = _database.Get(scene);
 		if (view == null)
@@ -42,10 +43,10 @@ public class FlowManager : SingletonComponent<FlowManager>
 	{
 		switch (action.ToUpper())
 		{
-			case "CLOSE":
+			case FlowDatabase.kClose:
 				CloseCurrent();
 				break;
-			case "OPEN":
+			case FlowDatabase.kOpen:
 				Open(view);
 				break;
 		}
@@ -75,6 +76,8 @@ public class FlowManager : SingletonComponent<FlowManager>
 		}
 
 		_currentView.transform.parent = _canvas.transform;
+		_currentView.transform.localPosition = Vector3.zero;
+		_currentView.transform.localScale = Vector3.one;
 		_currentView.transform.SetAsLastSibling();
 
 		yield return SceneManager.UnloadSceneAsync(id);
@@ -85,10 +88,13 @@ public class FlowManager : SingletonComponent<FlowManager>
 			while (_views.Count > 0)
 			{
 				view = _views.Pop();
+				view.StartClosingSequence();
 				yield return null;
 				Destroy(view.gameObject);
 			}
 		}
+
+		_currentView.OnViewLoaded();
 
 		_loadingView = string.Empty;
 		_coroutine = null;
@@ -98,17 +104,5 @@ public class FlowManager : SingletonComponent<FlowManager>
 	{
 		Destroy(_currentView.gameObject);
 		_currentView = _views.Pop();
-	}
-
-	[ContextMenu("Open")]
-	private void TestOpen()
-	{
-		Open("MainPanel");
-	}
-
-	[ContextMenu("Close Current")]
-	private void TestClose()
-	{
-		TriggerAction("CLOSE");
 	}
 }
