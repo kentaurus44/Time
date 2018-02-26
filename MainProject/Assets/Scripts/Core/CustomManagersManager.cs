@@ -14,4 +14,15 @@ public class CustomManagersManager : ManagersManager
             DatabaseManager.Instance.JsonDatabase.Dialogs.ToString(),
             DatabaseManager.Instance.JsonDatabase.Chapters.ToString());
     }
+
+	protected override void OnSingletonLoaded(string id)
+	{
+		base.OnSingletonLoaded(id);
+
+		if (id == "FlowManager")
+		{
+			FlowManager.Instance.Open("MainPanel");
+		}
+
+	}
 }
