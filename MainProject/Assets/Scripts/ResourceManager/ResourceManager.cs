@@ -6,7 +6,7 @@ using System.IO;
 
 public class ResourceManager : SingletonComponent<ResourceManager>
 {
-	private const string kResourcePath = "Resource/";
+	private const string kResourcePath = "Resource";
 	private Dictionary<string, ResourceData> _resource = new Dictionary<string, ResourceData>();
 	private Queue<ResourceRequest> _queue = new Queue<ResourceRequest>();
 	private Coroutine _coroutine;

@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class Database<T> : ScriptableObject where T : ScriptableObject
 {
-    private const string kPathToDatabase = "/Database/{0}";
+    private const string kPathToDatabase = "Assets/Resources/Database/{0}.asset";
 
     public static T GetEditorInstance()
     {

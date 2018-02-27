@@ -101,13 +101,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _managers:
-  - {fileID: 114279976951140420, guid: cbc4791a31a7bd041a5883b7e9b5a9fb, type: 2}
+  - {fileID: 114589244404659430, guid: b1f911768b0a9b04a9f783d58d99e402, type: 2}
   - {fileID: 114783873933955000, guid: c570b4034bdace54890b689801fb18a3, type: 2}
   - {fileID: 114493552622858272, guid: ad631683d351df744a804f07490432a4, type: 2}
   - {fileID: 114279179144234358, guid: 011bdaa0b7cd8044597f317b99027a79, type: 2}
   - {fileID: 114501242404260124, guid: bca8c12fbb067ff489430bd1828beb18, type: 2}
   - {fileID: 114034450211848826, guid: 5c7f975ffcc16ef48980ebd75df04f0a, type: 2}
   - {fileID: 114826772998177886, guid: 30a1a2a82cab59249a88279030e8872c, type: 2}
+  - {fileID: 114279976951140420, guid: cbc4791a31a7bd041a5883b7e9b5a9fb, type: 2}
 --- !u!114 &114882811787363324
 MonoBehaviour:
   m_ObjectHideFlags: 1
