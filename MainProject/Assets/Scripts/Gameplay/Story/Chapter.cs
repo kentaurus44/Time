@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chapter : MonoBehaviour
+public class Chapter : ResourceData<Chapter>
 {
     [SerializeField]
     protected Chapters _chapter;

@@ -16,8 +16,11 @@ public class FlowManager : SingletonComponent<FlowManager>
 	[SerializeField]
 	private Canvas _canvas;
 
+	private Dictionary<string, object> _parameters = null;
+
 	public bool IsLoading { get { return _coroutine != null; } }
 	public View CurrentView { get { return _currentView; } }
+	public FlowDatabase Database { get { return _database; } }
 
 	private void Open(string scene)
 	{
@@ -39,12 +42,13 @@ public class FlowManager : SingletonComponent<FlowManager>
 		}
 	}
 
-	public void TriggerAction(string action, string view = "")
+	public void TriggerAction(string action, string view = "", Dictionary<string, object> param = null)
 	{
+		_parameters = param;
 		switch (action.ToUpper())
 		{
 			case FlowDatabase.kClose:
-				CloseCurrent();
+				Close();
 				break;
 			case FlowDatabase.kOpen:
 				Open(view);
@@ -75,9 +79,7 @@ public class FlowManager : SingletonComponent<FlowManager>
 			}
 		}
 
-		_currentView.transform.parent = _canvas.transform;
-		_currentView.transform.localPosition = Vector3.zero;
-		_currentView.transform.localScale = Vector3.one;
+		_currentView.transform.SetParent(_canvas.transform, false);
 		_currentView.transform.SetAsLastSibling();
 
 		yield return SceneManager.UnloadSceneAsync(id);
@@ -93,14 +95,16 @@ public class FlowManager : SingletonComponent<FlowManager>
 				Destroy(view.gameObject);
 			}
 		}
+		_currentView.OnViewLoaded(_parameters);
 
-		_currentView.OnViewLoaded();
+		yield return null;
 
 		_loadingView = string.Empty;
 		_coroutine = null;
+		_parameters = null;
 	}
 
-	private void CloseCurrent()
+	private void Close()
 	{
 		Destroy(_currentView.gameObject);
 		_currentView = _views.Pop();

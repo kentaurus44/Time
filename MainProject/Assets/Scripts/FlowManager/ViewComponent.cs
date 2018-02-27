@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ViewComponent : MonoBehaviour
 {
-	public virtual void OnViewLoaded()
+	public virtual void OnViewLoaded(Dictionary<string, object> param)
 	{
 		
 	}
@@ -17,6 +17,11 @@ public class ViewComponent : MonoBehaviour
 	public virtual void OnStartOpeningSequenceComplete()
 	{
 		
+	}
+
+	public virtual void OnViewOpened()
+	{
+
 	}
 
 	public virtual void StartClosingSequence()

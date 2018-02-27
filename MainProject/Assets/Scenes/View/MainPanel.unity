@@ -786,4 +786,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _button: {fileID: 2117604061}
   _action: OPEN
-  _view: GameScene
+  _view: LevelSelection
