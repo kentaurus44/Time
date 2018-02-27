@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class View : ViewComponent
 {
-	public override void OnViewLoaded()
+	public override void OnViewLoaded(Dictionary<string, object> param)
 	{
-		base.OnViewLoaded();
+		base.OnViewLoaded(param);
 		StartOpeningSequence();
 	}
 
@@ -19,6 +19,12 @@ public class View : ViewComponent
 	public override void OnStartOpeningSequenceComplete()
 	{
 		base.OnStartOpeningSequenceComplete();
+		OnViewOpened();
+	}
+
+	public override void OnViewOpened()
+	{
+		base.OnViewOpened();
 	}
 
 	public override void StartClosingSequence()

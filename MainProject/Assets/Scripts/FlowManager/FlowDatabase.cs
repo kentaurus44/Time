@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [CreateAssetMenu(fileName = "FlowDatabase", menuName = "Database/FlowManager/FlowDatabase", order = 1)]
 public class FlowDatabase : Database<FlowDatabase>
@@ -31,6 +32,18 @@ public class FlowDatabase : Database<FlowDatabase>
 
 	public View[] Views { get { return _views; } }
 	
+	public string[] ViewNames
+	{
+		get
+		{
+			List<string> display = new List<string>();
+
+			display.AddRange(_views.Select(x => x.Id));
+
+			return display.ToArray();
+		}
+	}
+
 	public View Get(string id)
 	{
 		View view = null;

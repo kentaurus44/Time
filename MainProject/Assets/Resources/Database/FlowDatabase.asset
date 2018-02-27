@@ -16,3 +16,5 @@ MonoBehaviour:
     _isPopup: 0
   - _id: GameScene
     _isPopup: 0
+  - _id: LevelSelection
+    _isPopup: 0
