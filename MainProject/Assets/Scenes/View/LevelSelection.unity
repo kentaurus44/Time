@@ -697,7 +697,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1161405128}
-  - component: {fileID: 1161405127}
   - component: {fileID: 1161405129}
   m_Layer: 5
   m_Name: LevelSelection
@@ -706,19 +705,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1161405127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114623330051802666, guid: af1f794e3ef4a704daab95670e95e462,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1161405126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60c7b5326ee8fe449bfb4315e784495f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isPausing: 0
 --- !u!224 &1161405128
 RectTransform:
   m_ObjectHideFlags: 0
