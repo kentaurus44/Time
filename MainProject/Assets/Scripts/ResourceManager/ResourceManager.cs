@@ -15,28 +15,7 @@ public class ResourceManager : SingletonComponent<ResourceManager>
 
 	public T Get<T>(string item) where T : UnityEngine.Object
 	{
-		return _resource[item].Get() as T;
-	}
-
-	public T Get<T>(string item, out int index) where T : UnityEngine.Object
-	{
-		return _resource[item].Get(out index) as T;
-	}
-
-	public T Get<T>(string item, int index) where T : UnityEngine.Object
-	{
-		ResourceData data = null;
-
-		if (_resource.TryGetValue(item, out data))
-		{
-			return data.Get(index) as T;
-		}
-		else
-		{
-			Debug.LogWarningFormat("Item {0} was not found.", item);
-		}
-
-		return null;
+		return _resource[item] as T;
 	}
 
 	public void LoadResource(string resource, Action<string> onResourceLoaded, string path = "")
