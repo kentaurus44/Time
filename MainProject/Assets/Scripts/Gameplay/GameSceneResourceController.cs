@@ -13,19 +13,22 @@ public class GameSceneResourceController : MonoBehaviour
 
 	public const string kPlayerData = "Player";
 
-	private static readonly List<string> kResources = new List<string>()
-	{
-		kLevel,
-		kPlayerData
-	};
+	private PlayerController _player;
+	private Chapter _chapter;
 
-	private List<string> _enemyList;
+	public PlayerController Player
+	{
+		get { return _player; }
+	}
+
+	public Chapter Chapter
+	{
+		get { return _chapter; }
+	}
 
 	public IEnumerator Processing(string chapterName, List<string> enemyList)
 	{
 		yield return null;
-
-		_enemyList = enemyList;
 
 		ResourceManager.Instance.LoadResource(chapterName, OnAssetsLoaded, kChapters);
 		ResourceManager.Instance.LoadResource(kPlayerData, OnAssetsLoaded, kCharacters);
@@ -40,14 +43,13 @@ public class GameSceneResourceController : MonoBehaviour
 			yield return null;
 		}
 
-		Chapter chapterResource = ResourceManager.Instance.Get<Chapter>(kLevel);
-		PlayerResourceData playerResource = ResourceManager.Instance.Get<PlayerResourceData>(kPlayerData);
-		playerResource.Player.transform.SetParent(chapterResource.CharacterInitialPosition.transform, false);
-		playerResource.Player.transform.localPosition = Vector3.zero;
+		_chapter = ResourceManager.Instance.Get<Chapter>(kLevel);
+		_player = ResourceManager.Instance.Get<PlayerResourceData>(kPlayerData).Player;
 		yield return null;
 	}
 
 	private void OnAssetsLoaded(string asset)
 	{
+
 	}
 }
