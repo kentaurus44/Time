@@ -11,7 +11,7 @@ public class ResourceManager : SingletonComponent<ResourceManager>
 	private Queue<ResourceRequest> _queue = new Queue<ResourceRequest>();
 	private Coroutine _coroutine;
 
-	public bool IsLoadingAsset { get { return _queue.Count > 0; } }
+	public bool IsLoadingAsset { get { return _queue.Count > 0 || _coroutine != null; } }
 
 	public T Get<T>(string item) where T : UnityEngine.Object
 	{
@@ -20,6 +20,12 @@ public class ResourceManager : SingletonComponent<ResourceManager>
 
 	public void LoadResource(string resource, Action<string> onResourceLoaded, string path = "")
 	{
+		if (_resource.ContainsKey(resource))
+		{
+			onResourceLoaded.SafeInvoke(resource);
+			return;
+		}
+
 		ResourceRequest request;
 		request.Path = Path.Combine(kResourcePath, path);
 		request.Resource = resource;

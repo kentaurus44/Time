@@ -8,20 +8,14 @@ public class GameSceneController : MonoBehaviour
 	[SerializeField]
 	private GameSceneResourceController _gameSceneResourceController;
 
-	private Action OnReadyToPlayCB;
-
 	public void Init(string item, Action onReadyToPlay)
 	{
-		OnReadyToPlayCB = onReadyToPlay;
-		_gameSceneResourceController.Init(item, OnResourceLoaded);
+		StartCoroutine(Process(item, onReadyToPlay));
 	}
 
-	private void OnResourceLoaded()
+	private IEnumerator Process(string item, Action onReadyToPlay)
 	{
-	}
-
-	private void ReadyToPlay()
-	{
-		OnReadyToPlayCB.SafeInvoke();
+		yield return _gameSceneResourceController.Processing(item, new List<string>());
+		onReadyToPlay.SafeInvoke();
 	}
 }
