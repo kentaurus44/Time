@@ -16,12 +16,7 @@ public class Chapter : ResourceData<Chapter>
     [SerializeField]
     protected Transform _characterInitialPosition;
 
-    public string ChapterKey
-    {
-        get { return _chapter.ToString(); }
-    }
-
-    public Transform CharacterPosition
+    public Transform CharacterInitialPosition
     {
         get { return _characterInitialPosition; }
     }

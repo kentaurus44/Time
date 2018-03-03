@@ -6,8 +6,8 @@ using System.Linq;
 [CreateAssetMenu(fileName = "FlowDatabase", menuName = "Database/FlowManager/FlowDatabase", order = 1)]
 public class FlowDatabase : Database<FlowDatabase>
 {
-	public const string kOpen = "OPEN";
-	public const string kClose = "CLOSE";
+	public const string kOpen = "Open";
+	public const string kClose = "Close";
 
 	public static readonly string[] kFlowActions = new string[]
 	{

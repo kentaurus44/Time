@@ -1,42 +1,55 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.IO;
 
 public class GameSceneResourceController : MonoBehaviour
 {
+	private const string kChapters = "Chapters";
 	private const string kLevel = "Level";
 
-	private static readonly List<string> kResources = new List<string>()
+	private const string kCharacters = "Characters";
+	private const string kPlayerResource = "Player";
+
+	public const string kPlayerData = "Player";
+
+	private PlayerController _player;
+	private Chapter _chapter;
+
+	public PlayerController Player
 	{
-		kLevel
-	};
+		get { return _player; }
+	}
 
-	[SerializeField]
-	protected string _resourcePath;
-
-	private int _itemsLoaded = 0;
-	private Action OnAssetseLoadedComplete;
-
-	public void Init(string chapter, Action onAssetsLoaded)
+	public Chapter Chapter
 	{
-		_itemsLoaded = 0;
-		OnAssetseLoadedComplete = onAssetsLoaded;
-		foreach (var item in kResources)
+		get { return _chapter; }
+	}
+
+	public IEnumerator Processing(string chapterName, List<string> enemyList)
+	{
+		yield return null;
+
+		ResourceManager.Instance.LoadResource(chapterName, OnAssetsLoaded, kChapters);
+		ResourceManager.Instance.LoadResource(kPlayerData, OnAssetsLoaded, kCharacters);
+
+		for (int i = 0, count = enemyList.Count; i < count; ++i)
 		{
-			ResourceManager.Instance.LoadResource(chapter, OnAssetsLoaded, _resourcePath);
+			ResourceManager.Instance.LoadResource(enemyList[i], OnAssetsLoaded, kCharacters);
 		}
+
+		while (ResourceManager.Instance.IsLoadingAsset)
+		{
+			yield return null;
+		}
+
+		_chapter = ResourceManager.Instance.Get<Chapter>(kLevel);
+		_player = ResourceManager.Instance.Get<PlayerResourceData>(kPlayerData).Player;
+		yield return null;
 	}
 
 	private void OnAssetsLoaded(string asset)
 	{
-		if (kResources.Contains(asset))
-		{
-			_itemsLoaded++;
-			if (_itemsLoaded >= kResources.Count)
-			{ 
-				OnAssetseLoadedComplete.SafeInvoke();
-			}
-		}
+
 	}
 }

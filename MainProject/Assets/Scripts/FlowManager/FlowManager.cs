@@ -45,7 +45,7 @@ public class FlowManager : SingletonComponent<FlowManager>
 	public void TriggerAction(string action, string view = "", Dictionary<string, object> param = null)
 	{
 		_parameters = param;
-		switch (action.ToUpper())
+		switch (action)
 		{
 			case FlowDatabase.kClose:
 				Close();
@@ -95,6 +95,7 @@ public class FlowManager : SingletonComponent<FlowManager>
 				Destroy(view.gameObject);
 			}
 		}
+
 		_currentView.OnViewLoaded(_parameters);
 
 		yield return null;

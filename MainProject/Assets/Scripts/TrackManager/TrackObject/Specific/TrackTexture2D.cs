@@ -9,7 +9,7 @@ public class TrackTexture2D : TrackObject<Texture2D>
 
 	public override void Load()
 	{
-		_renderer.material.mainTexture = GetAsset();
+		//_renderer.material.mainTexture = GetAsset();
 	}
 
 	public override void Unload()
