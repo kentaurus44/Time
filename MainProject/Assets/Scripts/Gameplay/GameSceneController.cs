@@ -29,19 +29,21 @@ public class GameSceneController : MonoBehaviour
 	private IEnumerator Process(string item, Action onReadyToPlay)
 	{
 		yield return _gameSceneResourceController.Processing(item, new List<string>());
+
 		TrackManager.Instance.Load(_gameSceneResourceController.Chapter.TrackContainer);
 		_player = _gameSceneResourceController.Player;
 		_player.transform.SetParent(_gameSceneResourceController.Chapter.CharacterInitialPosition.transform, false);
 		_player.transform.localPosition = Vector3.zero;
 		_player.Vehicle.LoadSettings(DatabaseManager.Instance.PlayerConfigs.VehicleSettings);
 		yield return null;
+
 		CameraConfigs _cameraConfigs = DatabaseManager.Instance.CameraConfigs;
 		CustomCamera.CameraManager.Instance.MainCameraController.Init(DatabaseManager.Instance.CameraConfigs);
 		CustomCamera.CameraManager.Instance.MainCameraController.SetAtPosition(_player.transform.position);
 		_player.Vehicle.OnLanded += CustomCamera.CameraManager.Instance.MainCameraController.SetFloor;
 		_player.Vehicle.OnJump += CustomCamera.CameraManager.Instance.MainCameraController.OnJump;
-
 		yield return null;
+
 		_gameSceneResourceController.Player.Init();
 		yield return null;
 

@@ -12,7 +12,7 @@ public class FlowAttributeDrawer : PropertyDrawer
 		EditorGUI.BeginProperty(position, label, property);
 
 		FlowDatabase db = FlowDatabase.GetEditorInstance();
-		FlowDatabase.View[] views = db.Views;
+		FlowView[] views = db.Views;
 
 		List<string> display = new List<string>() { "None" };
 		display.AddRange(views.Select(x => x.Id));
