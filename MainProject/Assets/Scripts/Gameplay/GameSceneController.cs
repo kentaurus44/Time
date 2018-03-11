@@ -11,7 +11,7 @@ public class GameSceneController : MonoBehaviour
 	private bool _gameReadyToPlay = false;
 	private PlayerController _player;
 
-	protected void Update()
+	protected virtual void Update()
 	{
 		if (_gameReadyToPlay)
 		{
@@ -26,10 +26,15 @@ public class GameSceneController : MonoBehaviour
 		StartCoroutine(Process(item, onReadyToPlay));
 	}
 
-	private IEnumerator Process(string item, Action onReadyToPlay)
+	protected IEnumerator Process(string item, Action onReadyToPlay)
 	{
 		yield return _gameSceneResourceController.Processing(item, new List<string>());
+		yield return InitGame();
+		yield return Complete(onReadyToPlay);
+	}
 
+	protected virtual IEnumerator InitGame()
+	{
 		TrackManager.Instance.Load(_gameSceneResourceController.Chapter.TrackContainer);
 		_player = _gameSceneResourceController.Player;
 		_player.transform.SetParent(_gameSceneResourceController.Chapter.CharacterInitialPosition.transform, false);
@@ -46,8 +51,12 @@ public class GameSceneController : MonoBehaviour
 
 		_gameSceneResourceController.Player.Init();
 		yield return null;
+	}
 
+	protected IEnumerator Complete(Action onReadyToPlay)
+	{
 		_gameReadyToPlay = true;
 		onReadyToPlay.SafeInvoke();
+		yield return null;
 	}
 }

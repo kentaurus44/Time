@@ -151,7 +151,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 789374185}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77e466039c4dc804c98576995b8644ed, type: 3}
+  m_Script: {fileID: 11500000, guid: b5adde40dda2ae047aa46cabd28c2bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _gameSceneResourceController: {fileID: 789374188}

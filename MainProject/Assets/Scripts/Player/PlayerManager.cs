@@ -11,18 +11,6 @@ public class PlayerManager : SingletonComponent<PlayerManager>
 
     private PlayerSkill _currentRunningSkill;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        Load();
-    }
-
-    public override void Init()
-    {
-        base.Init();
-        _playerController.gameObject.SetActive(false);
-    }
-
     public void Load()
     {
         _playerController.Init();
