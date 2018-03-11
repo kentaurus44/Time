@@ -6,8 +6,6 @@ using UnityEngine;
 public class FlowView : ScriptableObject
 {
 	[SerializeField]
-	private string _id;
-	[SerializeField]
 	private bool _isPopup = false;
 
 	[Header("Loading Screen")]
@@ -16,7 +14,7 @@ public class FlowView : ScriptableObject
 	[SerializeField]
 	private bool _onEnter = false;
 
-	public string Id { get { return _id; } }
+	public string Id { get { return name; } }
 	public bool IsPopup { get { return _isPopup; } }
 	public bool UseLoadingEnter { get { return _onEnter; } }
 	public bool UseLoadingExit { get { return _onExit; } }
