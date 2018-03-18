@@ -6,41 +6,39 @@ using System.IO;
 
 public class ResourceManager : SingletonComponent<ResourceManager>
 {
-	private const string kResourcePath = "Resource/";
-	private Dictionary<string, ResourceData> _resource = new Dictionary<string, ResourceData>();
+	private const string kResourcePath = "Resource";
+	private Dictionary<string, ResourceData> _resourceData = new Dictionary<string, ResourceData>();
+	private Dictionary<string, Resource> _resource = new Dictionary<string, Resource>();
 	private Queue<ResourceRequest> _queue = new Queue<ResourceRequest>();
+	private Queue<string> _unloadQueue = new Queue<string>();
 	private Coroutine _coroutine;
+	private Coroutine _deleteCoroutine;
 
-	public bool IsLoadingAsset { get { return _queue.Count > 0; } }
+	public bool IsLoadingAsset { get { return _queue.Count > 0 || _coroutine != null; } }
 
 	public T Get<T>(string item) where T : UnityEngine.Object
 	{
-		return _resource[item].Get() as T;
+		return _resourceData[item] as T;
 	}
 
-	public T Get<T>(string item, out int index) where T : UnityEngine.Object
+	public void UnloadResource(string resource)
 	{
-		return _resource[item].Get(out index) as T;
-	}
+		_unloadQueue.Enqueue(resource);
 
-	public T Get<T>(string item, int index) where T : UnityEngine.Object
-	{
-		ResourceData data = null;
-
-		if (_resource.TryGetValue(item, out data))
+		if (isActiveAndEnabled && _deleteCoroutine == null)
 		{
-			return data.Get(index) as T;
+			_deleteCoroutine = StartCoroutine("ResourceUnloading");
 		}
-		else
-		{
-			Debug.LogErrorFormat("Item {0} was not found.", item);
-		}
-
-		return null;
 	}
 
 	public void LoadResource(string resource, Action<string> onResourceLoaded, string path = "")
 	{
+		if (_resourceData.ContainsKey(resource))
+		{
+			onResourceLoaded.SafeInvoke(resource);
+			return;
+		}
+
 		ResourceRequest request;
 		request.Path = Path.Combine(kResourcePath, path);
 		request.Resource = resource;
@@ -51,6 +49,29 @@ public class ResourceManager : SingletonComponent<ResourceManager>
 		{
 			_coroutine = StartCoroutine("ResourceLoading");
 		}
+	}
+
+	private IEnumerator ResourceUnloading()
+	{
+		yield return null;
+
+		string item = string.Empty;
+
+		while (_unloadQueue.Count > 0)
+		{
+			item = _unloadQueue.Dequeue();
+
+			Resource resource = _resource[item];
+			foreach (var data in resource.Data)
+			{
+				_resourceData.Remove(data.Id);
+			}
+			Destroy(resource.gameObject);
+			yield return null;
+			_resource.Remove(item);
+		}
+
+		_deleteCoroutine = null;
 	}
 
 	private IEnumerator ResourceLoading()
@@ -66,11 +87,13 @@ public class ResourceManager : SingletonComponent<ResourceManager>
 			yield return resource = Resources.Load<Resource>(Path.Combine(resourceRequest.Path, resourceRequest.Resource));
 			yield return resource = Instantiate(resource, transform);
 
+			_resource.Add(resourceRequest.Resource, resource);
+
 			ResourceData data;
 			for (int i = 0, count = resource.Data.Length; i < count; ++i)
 			{
 				data = resource.Data[i];
-				_resource.Add(data.Id, data);
+				_resourceData.Add(data.Id, data);
 			}
 
 			resourceRequest.OnResourceLoaded.SafeInvoke(resourceRequest.Resource);

@@ -5,9 +5,6 @@ using UnityEngine;
 public class GameplayManager : SingletonComponent<GameplayManager>
 {
     [SerializeField]
-    protected GameplayLoader _loader;
-
-    [SerializeField]
     protected PlayerController _playerController;
 
     private string _chapter;
@@ -19,25 +16,9 @@ public class GameplayManager : SingletonComponent<GameplayManager>
         get { return _chapter; }
     }
 
-#if DEBUG_ON
-    public void OnGUI()
-    {
-        if (_loader.Chapter != null)
-        {
-            Rect rect = new Rect();
-            rect.width = Screen.width * 0.1f;
-            rect.height = 20f;
-            rect.x = 5f;
-            rect.y = 5f;
-            GUI.Label(rect, _chapter);
-        }
-    }
-#endif
-
     public override void Init()
     {
         base.Init();
-        _playerController.gameObject.SetActive(false);
     }
 
     public void Update()
@@ -52,22 +33,10 @@ public class GameplayManager : SingletonComponent<GameplayManager>
     {
         _playerController.Init();
         _chapter = chapter;
-        StartCoroutine(LoadChapter());
-    }
-
-    protected IEnumerator LoadChapter()
-    {
-        LoadingPanel.Instance.Show();
-        yield return _loader.LoadChapter(_chapter);
-        TrackManager.Instance.Load(_loader.Chapter.TrackContainer);
-        ResetPlayer();
-        LoadingPanel.Instance.Hide();
-        _inGame = true;
     }
 
     private void ResetPlayer()
     {
-        _playerController.transform.position = _loader.PlayerInitialLocation.position;
         _playerController.gameObject.SetActive(true);
     }
 }

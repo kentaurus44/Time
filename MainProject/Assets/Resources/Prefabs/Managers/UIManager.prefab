@@ -71,10 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _panels:
-  - {fileID: 114623330051802666, guid: af1f794e3ef4a704daab95670e95e462, type: 2}
-  - {fileID: 114118800713028242, guid: 0bb4fce4be79a184fbbc632ee0137364, type: 2}
-  - {fileID: 114496820001609892, guid: edb38eacb3e2c5048a60f13b3cadfe9c, type: 2}
   - {fileID: 114812232717650860, guid: bf4c762c87b33fc42a6efe6d0391ed44, type: 2}
+  - {fileID: 114496820001609892, guid: edb38eacb3e2c5048a60f13b3cadfe9c, type: 2}
   _rootDisplay1: {fileID: 223979842473657020}
 --- !u!114 &114139857208464134
 MonoBehaviour:

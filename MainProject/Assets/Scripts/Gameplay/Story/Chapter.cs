@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Chapter : MonoBehaviour
+public class Chapter : ResourceData<Chapter>
 {
     [SerializeField]
     protected Chapters _chapter;
@@ -16,12 +16,7 @@ public class Chapter : MonoBehaviour
     [SerializeField]
     protected Transform _characterInitialPosition;
 
-    public string ChapterKey
-    {
-        get { return _chapter.ToString(); }
-    }
-
-    public Transform CharacterPosition
+    public Transform CharacterInitialPosition
     {
         get { return _characterInitialPosition; }
     }
