@@ -19,7 +19,6 @@ public class GameplayManager : SingletonComponent<GameplayManager>
     public override void Init()
     {
         base.Init();
-        _playerController.gameObject.SetActive(false);
     }
 
     public void Update()

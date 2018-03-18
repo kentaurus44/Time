@@ -18,11 +18,6 @@ public class GameSceneView : View
 		_gameSceneController.Init(chapterKey, OnLoadComplete);
 	}
 
-	public override void OnViewOpened()
-	{
-		base.OnViewOpened();
-	}
-
 	private void OnLoadComplete()
 	{
 		base.OnViewLoaded(_param);

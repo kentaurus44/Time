@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class VehicleSettings
@@ -57,6 +58,9 @@ public class VehicleSettings
 
 public class TrackVehicle : MonoBehaviour
 {
+	public Action<float> OnLanded;
+	public Action OnJump;
+
     [SerializeField]
     protected BoxCollider2D _collider;
 
@@ -129,6 +133,7 @@ public class TrackVehicle : MonoBehaviour
     {
         _velocity.y = Settings.JumpVelocity;
         _isInAir = true;
+		OnJump.SafeInvoke();
     }
 
     public virtual void OnUpdate()
@@ -201,9 +206,10 @@ public class TrackVehicle : MonoBehaviour
         {
             _predictedPosition.y = GetHeight();
             _velocity.y = 0;
-            _isInAir = false;
-        }
-    }
+			_isInAir = false;
+			OnLanded.SafeInvoke(floor);
+		}
+	}
 
     protected virtual void ApplyGravity()
     {

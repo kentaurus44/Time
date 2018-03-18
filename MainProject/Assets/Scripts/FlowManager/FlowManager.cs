@@ -8,13 +8,15 @@ public class FlowManager : SingletonComponent<FlowManager>
 {
 	[SerializeField]
 	private FlowDatabase _database;
+	[SerializeField]
+	private FlowLoadingScreen _loadingScreen;
+	[SerializeField]
+	private Canvas _canvas;
 	private Stack<View> _views = new Stack<View>();
 	private Coroutine _coroutine;
 	private View _currentView;
 	private string _loadingView;
-
-	[SerializeField]
-	private Canvas _canvas;
+	private FlowView _currentViewSettings;
 
 	private Dictionary<string, object> _parameters = null;
 
@@ -24,7 +26,7 @@ public class FlowManager : SingletonComponent<FlowManager>
 
 	private void Open(string scene)
 	{
-		FlowDatabase.View view = _database.Get(scene);
+		FlowView view = _database.Get(scene);
 		if (view == null)
 		{
 			Debug.LogErrorFormat("{0} has no settings.", scene);
@@ -56,9 +58,18 @@ public class FlowManager : SingletonComponent<FlowManager>
 		}
 	}
 
-	private IEnumerator SceneLoading(FlowDatabase.View scene)
+	private IEnumerator SceneLoading(FlowView scene)
 	{
 		string id = scene.Id;
+
+		_loadingScreen.transform.SetAsLastSibling();
+
+		if (!scene.IsPopup && scene.UseLoadingEnter || (_currentViewSettings != null && _currentViewSettings.UseLoadingExit))
+		{
+			_loadingScreen.gameObject.SetActive(true);
+			_loadingScreen.Begin();
+		}
+
 		yield return SceneManager.LoadSceneAsync(id, LoadSceneMode.Additive);
 		View[] views;
 		yield return views = FindObjectsOfType<View>();
@@ -75,12 +86,13 @@ public class FlowManager : SingletonComponent<FlowManager>
 			if (id == view.name && view != _currentView && !_views.Contains(view))
 			{
 				_currentView = view;
+				_currentViewSettings = scene;
 				break;
 			}
 		}
 
 		_currentView.transform.SetParent(_canvas.transform, false);
-		_currentView.transform.SetAsLastSibling();
+		_currentView.transform.SetSiblingIndex(_loadingScreen.transform.GetSiblingIndex() - 1);
 
 		yield return SceneManager.UnloadSceneAsync(id);
 
@@ -97,6 +109,25 @@ public class FlowManager : SingletonComponent<FlowManager>
 		}
 
 		_currentView.OnViewLoaded(_parameters);
+
+		if (_loadingScreen.isActiveAndEnabled)
+		{
+			while (!_currentView.LoadingComplete || _loadingScreen.IsTransitioning)
+			{
+				yield return null;
+			}
+
+			_loadingScreen.End();
+
+			while (_loadingScreen.IsLoadingScreeenOpen)
+			{
+				yield return null;
+			}
+
+			_loadingScreen.gameObject.SetActive(false);
+		}
+
+		_currentView.OnFocusGain();
 
 		yield return null;
 

@@ -15,6 +15,7 @@ public class GameSceneResourceController : MonoBehaviour
 
 	private PlayerController _player;
 	private Chapter _chapter;
+	private string _chapterKey;
 
 	public PlayerController Player
 	{
@@ -26,10 +27,19 @@ public class GameSceneResourceController : MonoBehaviour
 		get { return _chapter; }
 	}
 
+	public void OnDestroy()
+	{
+		if (!ResourceManager.IsInstanceNull)
+		{
+			ResourceManager.Instance.UnloadResource(kPlayerData);
+			ResourceManager.Instance.UnloadResource(_chapterKey);
+		}
+	}
+
 	public IEnumerator Processing(string chapterName, List<string> enemyList)
 	{
 		yield return null;
-
+		_chapterKey = chapterName;
 		ResourceManager.Instance.LoadResource(chapterName, OnAssetsLoaded, kChapters);
 		ResourceManager.Instance.LoadResource(kPlayerData, OnAssetsLoaded, kCharacters);
 

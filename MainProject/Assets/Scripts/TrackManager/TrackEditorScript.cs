@@ -1,11 +1,9 @@
 ﻿#if UNITY_EDITOR
 using UnityEngine;
-#endif
 
 [ExecuteInEditMode]
 public class TrackEditorScript : MonoBehaviour
 {
-#if UNITY_EDITOR
 	private Track _track;
 
     protected virtual void OnDrawGizmos()
@@ -50,5 +48,5 @@ public class TrackEditorScript : MonoBehaviour
 		size.y = 1f;
 		_track.BoxCollider.size = size;
     }
-#endif
 }
+#endif
