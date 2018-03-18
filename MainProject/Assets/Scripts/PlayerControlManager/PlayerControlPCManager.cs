@@ -4,7 +4,7 @@ using UnityEngine;
 
 public partial class PlayerControlManager
 {
-	partial void UpdateActions()
+	partial void UpdatePC()
 	{
 		if (Input.GetKey(KeyCode.D))
 		{

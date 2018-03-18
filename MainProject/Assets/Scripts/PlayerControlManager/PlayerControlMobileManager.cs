@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-#if UNITY_ANDROID || UNITY_EDITOR
 public partial class PlayerControlManager
 {
 	[SerializeField]
@@ -10,28 +9,37 @@ public partial class PlayerControlManager
 	[SerializeField]
 	private Button _jump;
 
+	private float _direction = 0f;
+	private float _targetDirection = -1f;
+
 	partial void InitMobile()
 	{
 		_dPad.Init();
 		_jump.onClick.AddListener(CharacterJump);
-		_dPad.OnAngleSet = OnAngleSet;
 	}
 
-	private void OnAngleSet(float angle)
+	partial void UpdateMobile()
 	{
-		if (0 < angle && angle < 180)
+		if (_dPad.IsMoving && _dPad.IsFingerDown)
 		{
-			CharacterMove(1f);
-		}
-		else if (180 < angle && angle < 360)
-		{
-			CharacterMove(-1f);
+			if (0 < _dPad.Angle && _dPad.Angle < 180)
+			{
+				_targetDirection = 1f;
+			}
+			else if (180 < _dPad.Angle && _dPad.Angle < 360)
+			{
+				_targetDirection = - 1f;
+			}
 		}
 		else
 		{
-			CharacterMove(0f);
+			_targetDirection = 0f;
+		}
+
+		if (_targetDirection != _direction)
+		{
+			CharacterMove(_targetDirection);
+			_direction = _targetDirection;
 		}
 	}
-
 }
-#endif
