@@ -23,9 +23,8 @@ public class VehicleSettings
     protected float _move = 100f;
     [SerializeField]
     protected bool _switchTrackAtEdge = true;
-
-
-    public float Gravity
+	
+	public float Gravity
     {
         get { return _gravity; }
     }
@@ -74,7 +73,9 @@ public class TrackVehicle : MonoBehaviour
     [SerializeField]
     protected bool _isInAir = false;
 
-    protected Vector3 _velocity;
+	protected float _direction;
+
+	protected Vector3 _velocity;
     protected Vector3 _predictedPosition;
     protected Track _tempTrack;
 
@@ -91,7 +92,13 @@ public class TrackVehicle : MonoBehaviour
         get { return _isInAir; }
     }
 
-    public float Ratio
+	public float Direction
+	{
+		get { return _direction; }
+	}
+
+
+	public float Ratio
     {
         get
         {
@@ -119,7 +126,9 @@ public class TrackVehicle : MonoBehaviour
 
     public virtual void Move(float direction)
     {
-        if (direction != 0f)
+		_direction = direction;
+
+		if (direction != 0f)
         {
             _velocity.x = Settings.Move * direction;
         }
@@ -131,10 +140,13 @@ public class TrackVehicle : MonoBehaviour
 
     public virtual void Jump()
     {
-        _velocity.y = Settings.JumpVelocity;
-        _isInAir = true;
-		OnJump.SafeInvoke();
-    }
+		if (!_isInAir)
+		{
+			_velocity.y = Settings.JumpVelocity;
+			_isInAir = true;
+			OnJump.SafeInvoke();
+		}
+	}
 
     public virtual void OnUpdate()
     {

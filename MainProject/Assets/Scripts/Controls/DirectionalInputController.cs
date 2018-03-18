@@ -7,11 +7,12 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using System;
 
 public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
-    #region Variables
+	#region Variables
+	public Action<float> OnAngleSet;
     protected Vector3 m_CenterPosition;
     protected Vector3 m_TargetPosition;
     protected float m_Angle;
@@ -37,6 +38,14 @@ public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, ID
             Init();
         }
     }
+
+	protected virtual void Update()
+	{
+		if (m_IsMoving && m_IsFingerDown)
+		{
+			OnAngleSet.SafeInvoke(m_Angle);
+		}
+	}
     #endregion
 
     #region Public Methods
@@ -92,7 +101,9 @@ public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, ID
         {
             m_Angle = 360 - m_Angle;
         }
-    }
+
+		OnAngleSet.SafeInvoke(m_Angle);
+	}
 
 	protected virtual void OnDataSet(PointerEventData data)
 	{

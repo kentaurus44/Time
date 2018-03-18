@@ -5,8 +5,6 @@ using UnityEngine;
 public class TestManager : MonoBehaviour
 {
     [SerializeField]
-    protected CharacterControl _character;
-    [SerializeField]
     protected CameraConfigs _cameraConfigs;
 
 
