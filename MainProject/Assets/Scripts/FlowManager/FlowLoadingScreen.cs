@@ -35,6 +35,7 @@ public class FlowLoadingScreen : MonoBehaviour
 
 	public void Begin()
 	{
+		gameObject.SetActive(true);
 		_object.transform.position = _initialPosition.position;
 		_sequence = DOTween.Sequence();
 		_isLoadingScreenOpen = true;
@@ -48,6 +49,7 @@ public class FlowLoadingScreen : MonoBehaviour
 		_sequence = DOTween.Sequence();
 		TweenCallback callback = () => {
 			_isLoadingScreenOpen = false;
+			gameObject.SetActive(false);
 		};
 
 		_sequence.Append(DOTween.To((x) => Move(x), 0.5f, 1f, _moveTime).SetDelay(_minLength));

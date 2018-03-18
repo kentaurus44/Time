@@ -66,7 +66,6 @@ public class FlowManager : SingletonComponent<FlowManager>
 
 		if (!scene.IsPopup && scene.UseLoadingEnter || (_currentViewSettings != null && _currentViewSettings.UseLoadingExit))
 		{
-			_loadingScreen.gameObject.SetActive(true);
 			_loadingScreen.Begin();
 		}
 
@@ -123,8 +122,6 @@ public class FlowManager : SingletonComponent<FlowManager>
 			{
 				yield return null;
 			}
-
-			_loadingScreen.gameObject.SetActive(false);
 		}
 
 		_currentView.OnFocusGain();
