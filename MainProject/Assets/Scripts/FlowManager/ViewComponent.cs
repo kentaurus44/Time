@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class ViewComponent : MonoBehaviour
 {
+	private bool _loadingComplete = false;
+
+	public bool LoadingComplete { get { return _loadingComplete; } }
+
 	public virtual void OnViewLoaded(Dictionary<string, object> param)
 	{
-		
+
 	}
 
 	public virtual void StartOpeningSequence()
@@ -20,6 +24,11 @@ public class ViewComponent : MonoBehaviour
 	}
 
 	public virtual void OnViewOpened()
+	{
+		_loadingComplete = true;
+	}
+
+	public virtual void OnFocusGain()
 	{
 
 	}

@@ -12,11 +12,7 @@ MonoBehaviour:
   m_Name: FlowDatabase
   m_EditorClassIdentifier: Assembly-CSharp::FlowDatabase
   _views:
-  - _id: MainPanel
-    _isPopup: 0
-  - _id: GameScene
-    _isPopup: 0
-  - _id: LevelSelection
-    _isPopup: 0
-  - _id: Options
-    _isPopup: 1
+  - {fileID: 11400000, guid: b29b2436562b25d44850053519575d0c, type: 2}
+  - {fileID: 11400000, guid: af30ed3db6554824badb4cf3dac3d9b8, type: 2}
+  - {fileID: 11400000, guid: 03a7b752e6d53e3449f6c870db7762cf, type: 2}
+  - {fileID: 11400000, guid: c6fab58451e4f73428ba848eca1fc569, type: 2}

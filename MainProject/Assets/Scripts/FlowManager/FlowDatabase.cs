@@ -15,22 +15,10 @@ public class FlowDatabase : Database<FlowDatabase>
 		kClose
 	};
 
-	[System.Serializable]
-	public class View
-	{
-		[SerializeField]
-		private string _id;
-		[SerializeField]
-		private bool _isPopup = false;
-
-		public string Id { get { return _id; } }
-		public bool IsPopup { get { return _isPopup; } }
-	}
-
 	[SerializeField]
-	private View[] _views = new View[0];
+	private FlowView[] _views = new FlowView[0];
 
-	public View[] Views { get { return _views; } }
+	public FlowView[] Views { get { return _views; } }
 	
 	public string[] ViewNames
 	{
@@ -44,10 +32,10 @@ public class FlowDatabase : Database<FlowDatabase>
 		}
 	}
 
-	public View Get(string id)
+	public FlowView Get(string id)
 	{
-		View view = null;
-		View tempView = null;
+		FlowView view = null;
+		FlowView tempView = null;
 		for (int i = 0, count = _views.Length; i < count; ++i)
 		{
 			tempView = _views[i];
