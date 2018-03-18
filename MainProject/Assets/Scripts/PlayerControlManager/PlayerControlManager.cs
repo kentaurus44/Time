@@ -23,7 +23,7 @@ public partial class PlayerControlManager : SingletonComponent<PlayerControlMana
 		PC
 	}
 
-	private static Controls _controls = Controls.Mobile;
+	private static Controls _controls = Controls.PC;
 
 	protected void Start()
 	{
