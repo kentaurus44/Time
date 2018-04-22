@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class TestManager : MonoBehaviour
 {
-    [SerializeField]
-    protected CharacterControl _character;
-    [SerializeField]
-    protected CameraConfigs _cameraConfigs;
+	[SerializeField]
+	protected CameraConfigs _cameraConfigs;
 
 
-    protected void Start()
-    {
-        CustomCamera.CameraManager.Instance.MainCameraController.Init(DatabaseManager.Instance.CameraConfigs);
-    }
+	protected void Start()
+	{
+		// CustomCamera.CameraManager.Instance.MainCameraController.Init(DatabaseManager.Instance.CameraConfigs);
+	}
 }

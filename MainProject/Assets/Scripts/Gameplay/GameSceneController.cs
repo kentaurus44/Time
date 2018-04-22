@@ -17,7 +17,7 @@ public class GameSceneController : MonoBehaviour
 		{
 			_player.OnUpdate();
 
-			CustomCamera.CameraManager.Instance.MainCameraController.SetTargetPosition(_player.transform.position, _player.Direction);
+			// CustomCamera.CameraManager.Instance.MainCameraController.SetTargetPosition(_player.transform.position, _player.Vehicle.Direction);
 		}
 	}
 
@@ -43,10 +43,15 @@ public class GameSceneController : MonoBehaviour
 		yield return null;
 
 		CameraConfigs _cameraConfigs = DatabaseManager.Instance.CameraConfigs;
-		CustomCamera.CameraManager.Instance.MainCameraController.Init(DatabaseManager.Instance.CameraConfigs);
-		CustomCamera.CameraManager.Instance.MainCameraController.SetAtPosition(_player.transform.position);
-		_player.Vehicle.OnLanded += CustomCamera.CameraManager.Instance.MainCameraController.SetFloor;
-		_player.Vehicle.OnJump += CustomCamera.CameraManager.Instance.MainCameraController.OnJump;
+		// CustomCamera.CameraManager.Instance.MainCameraController.Init(DatabaseManager.Instance.CameraConfigs);
+		// CustomCamera.CameraManager.Instance.MainCameraController.SetAtPosition(_player.transform.position);
+		// _player.Vehicle.OnLanded += CustomCamera.CameraManager.Instance.MainCameraController.SetFloor;
+		// _player.Vehicle.OnJump += CustomCamera.CameraManager.Instance.MainCameraController.OnJump;
+		yield return null;
+
+
+		PlayerControlManager.OnMove += _player.Vehicle.Move;
+		PlayerControlManager.OnJump += _player.Vehicle.Jump;
 		yield return null;
 
 		_gameSceneResourceController.Player.Init();

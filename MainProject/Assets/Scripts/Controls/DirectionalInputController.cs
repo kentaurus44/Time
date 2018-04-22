@@ -7,44 +7,43 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-
+using System;
 
 public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler, IPointerUpHandler
 {
-    #region Variables
-    protected Vector3 m_CenterPosition;
-    protected Vector3 m_TargetPosition;
-    protected float m_Angle;
+	#region Variables
+	protected Vector3 m_CenterPosition;
+	protected Vector3 m_TargetPosition;
+	protected float m_Angle;
 
-    [SerializeField]
+	[SerializeField]
 	protected bool m_InitOnAwake = false;
 	[SerializeField]
 	protected RectTransform m_PanelRect;
 	protected bool m_IsMoving = false;
 	protected bool m_IsFingerDown = false;
 
-	public float Angle
-    {
-        get { return m_Angle; }
-    }
-    #endregion
+	public float Angle { get { return m_Angle; } }
+	public bool IsFingerDown { get { return m_IsFingerDown; } }
+	public bool IsMoving { get { return m_IsMoving; } }
+	#endregion
 
-    #region Unity API
-    protected virtual void Awake()
-    {
-        if (m_InitOnAwake)
-        {
-            Init();
-        }
-    }
-    #endregion
+	#region Unity API
+	protected virtual void Awake()
+	{
+		if (m_InitOnAwake)
+		{
+			Init();
+		}
+	}
+	#endregion
 
-    #region Public Methods
-    public virtual void Init()
-    {
-		Vector3 position = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(m_PanelRect.position);
-		position.z = 0f;
-		m_CenterPosition = position;
+	#region Public Methods
+	public virtual void Init()
+	{
+		// Vector3 position = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(m_PanelRect.position);
+		// position.z = 0f;
+		// m_CenterPosition = position;
 	}
 
 	public void OnPointerDown(PointerEventData data)
@@ -61,6 +60,7 @@ public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, ID
 
 	public void OnPointerUp(PointerEventData data)
 	{
+		m_Angle = -1f;
 		m_IsFingerDown = false;
 		m_IsMoving = false;
 	}
@@ -73,31 +73,32 @@ public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, ID
 
 	public void OnPointerExit(PointerEventData data)
 	{
+		m_Angle = -1f;
 		m_IsMoving = false;
 	}
 	#endregion
 
 	#region Protected Methods
 	protected virtual void SetAngle()
-    {
+	{
 		m_TargetPosition.z = transform.position.z;
 
-        Vector3 direction = m_TargetPosition - m_CenterPosition;
+		Vector3 direction = m_TargetPosition - m_CenterPosition;
 
-        // Vector3.Angle can only find 180 angles
-        m_Angle = Vector3.Angle(Vector3.up, direction);
+		// Vector3.Angle can only find 180 angles
+		m_Angle = Vector3.Angle(Vector3.up, direction);
 
-        // Checking for 360 degress
-        if (m_CenterPosition.x > m_TargetPosition.x)
-        {
-            m_Angle = 360 - m_Angle;
-        }
-    }
+		// Checking for 360 degress
+		if (m_CenterPosition.x > m_TargetPosition.x)
+		{
+			m_Angle = 360 - m_Angle;
+		}
+	}
 
 	protected virtual void OnDataSet(PointerEventData data)
 	{
 		m_PanelRect.SetAsFirstSibling();
-		m_TargetPosition = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(data.position);
+		// m_TargetPosition = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(data.position);
 		SetAngle();
 	}
 	#endregion
