@@ -9,7 +9,7 @@ public class LevelController : MonoBehaviour
 
 	public void Start()
 	{
-		ResourceManager.Instance.LoadResource(_item, OnItemLoaded);
+		//ResourceManager.Instance.LoadResource(_item, OnItemLoaded);
 	}
 
 	public void OnItemLoaded(string item)
