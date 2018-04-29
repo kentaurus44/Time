@@ -41,9 +41,9 @@ public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, ID
     #region Public Methods
     public virtual void Init()
     {
-		Vector3 position = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(m_PanelRect.position);
-		position.z = 0f;
-		m_CenterPosition = position;
+		//Vector3 position = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(m_PanelRect.position);
+		//position.z = 0f;
+		//m_CenterPosition = position;
 	}
 
 	public void OnPointerDown(PointerEventData data)
@@ -98,7 +98,7 @@ public class DirectionalInputController : MonoBehaviour, IPointerDownHandler, ID
 	protected virtual void OnDataSet(PointerEventData data)
 	{
 		m_PanelRect.SetAsFirstSibling();
-		m_TargetPosition = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(data.position);
+		//m_TargetPosition = CustomCamera.CameraManager.Instance.UICamera.WorldToScreenPoint(data.position);
 		SetAngle();
 	}
 	#endregion

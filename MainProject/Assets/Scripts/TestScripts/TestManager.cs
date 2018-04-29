@@ -10,6 +10,6 @@ public class TestManager : MonoBehaviour
 
     protected void Start()
     {
-        CustomCamera.CameraManager.Instance.MainCameraController.Init(DatabaseManager.Instance.CameraConfigs);
+        //CustomCamera.CameraManager.Instance.MainCameraController.Init(DatabaseManager.Instance.CameraConfigs);
     }
 }

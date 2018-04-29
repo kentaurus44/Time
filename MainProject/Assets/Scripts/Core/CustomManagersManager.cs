@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Core.Flow;
 
 public class CustomManagersManager : ManagersManager
 {
